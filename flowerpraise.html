@@ -1,0 +1,751 @@
+<title>칭찬하면 커지는 꽃</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --sky-1: #CDE5DF;
+    --sky-2: #F0F6EA;
+    --ink: #1E3A32;
+    --ink-soft: #4E6B62;
+    --ground: #5A4032;
+    --ground-dark: #3F2C22;
+    --pot: #C9784F;
+    --pot-rim: #B0643F;
+    --stem: #3E8E4F;
+    --leaf: #57A866;
+    --band: #2E9E74;
+    --card: #FFFFFF;
+    --warn: #D9534F;
+    --display: 'Jua', 'Gowun Dodum', system-ui, sans-serif;
+    --body: 'Gowun Dodum', system-ui, -apple-system, 'Malgun Gothic', sans-serif;
+    --soil-h: 74px;
+    --top-pad: 44px;
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--sky-1), var(--sky-2) 70%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 18px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(24px, 6vw, 32px);
+    margin: 0;
+    letter-spacing: -0.5px;
+    text-wrap: balance;
+  }
+  .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .levels {
+    display: inline-flex;
+    background: rgba(255,255,255,.55);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .levels button, .sound {
+    font-family: var(--display);
+    font-size: 15px;
+    border: 0;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .levels button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .sound { background: rgba(255,255,255,.55); }
+  button:focus-visible { outline: 3px solid var(--band); outline-offset: 2px; }
+
+  .hud {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer {
+    flex: 1;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(30,58,50,.12);
+    overflow: hidden;
+  }
+  .timer-fill {
+    height: 100%;
+    width: 100%;
+    background: var(--band);
+    border-radius: inherit;
+    transform-origin: left center;
+  }
+  .timer.low .timer-fill { background: var(--warn); }
+  .hud-text { font-size: 14px; color: var(--ink-soft); white-space: nowrap; }
+  .hud-text b { font-family: var(--display); font-weight: 400; font-size: 18px; color: var(--ink); }
+
+  .stage {
+    position: relative;
+    height: clamp(360px, 62vh, 520px);
+    border-radius: 20px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 70% at 50% 0%, rgba(255,255,255,.7), transparent 60%),
+      linear-gradient(180deg, #DDEFE9, #F5F9EF);
+    box-shadow: inset 0 0 0 1px rgba(30,58,50,.08);
+    user-select: none;
+  }
+  .ground {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 30px;
+    background: linear-gradient(180deg, var(--ground), var(--ground-dark));
+  }
+  .ruler {
+    position: absolute;
+    left: 0; width: 42px;
+    top: var(--top-pad);
+    bottom: var(--soil-h);
+    pointer-events: none;
+  }
+  .tick {
+    position: absolute;
+    right: 4px;
+    transform: translateY(50%);
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+    display: flex; align-items: center; gap: 3px;
+  }
+  .tick::after { content: ""; width: 6px; height: 1px; background: currentColor; opacity: .6; }
+  .gridline {
+    position: absolute; left: 42px; right: 0; height: 1px;
+    background: rgba(30,58,50,.07);
+    pointer-events: none;
+  }
+  .beds {
+    position: absolute;
+    left: 44px; right: 8px; top: 0; bottom: 0;
+    display: flex;
+  }
+  .bed {
+    flex: 1;
+    position: relative;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    min-width: 0;
+  }
+  .bed:disabled { cursor: default; }
+  .bed:focus-visible { outline: 3px solid var(--band); outline-offset: -6px; border-radius: 14px; }
+  .zone {
+    position: absolute;
+    left: 0; right: 0;
+    top: var(--top-pad);
+    bottom: var(--soil-h);
+  }
+  .band {
+    position: absolute;
+    left: 10%; right: 10%;
+    border: 2px dashed rgba(46,158,116,.75);
+    background: rgba(46,158,116,.12);
+    border-radius: 12px;
+    transition: background .25s, border-color .25s;
+  }
+  .band-label {
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--band);
+    white-space: nowrap;
+    font-weight: 700;
+  }
+  .bed.ok .band { border-style: solid; background: rgba(46,158,116,.26); border-color: var(--band); }
+  .stem {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 7px;
+    margin-left: -3.5px;
+    border-radius: 4px;
+    background: var(--stem);
+    transition: height .45s cubic-bezier(.3,1.45,.5,1);
+  }
+  .leaf {
+    position: absolute;
+    width: 22px; height: 11px;
+    background: var(--leaf);
+    border-radius: 0 100% 0 100%;
+  }
+  .leaf.l { right: 5px; bottom: 28%; transform: rotate(-20deg); transform-origin: right center; }
+  .leaf.r { left: 5px; bottom: 52%; transform: rotate(20deg) scaleX(-1); transform-origin: left center; border-radius: 0 100% 0 100%; }
+  .head {
+    position: absolute;
+    left: 50%;
+    width: clamp(54px, 13vw, 76px);
+    aspect-ratio: 1;
+    max-width: 100%;
+    transform: translate(-50%, 50%);
+    transition: bottom .45s cubic-bezier(.3,1.45,.5,1);
+  }
+  .head svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .head .petals { transition: transform .35s; transform-origin: 0 0; }
+  .bed.ok .head .petals { transform: scale(1.1) rotate(8deg); }
+  .cheek { opacity: 0; transition: opacity .25s; }
+  .bed.ok .cheek { opacity: .75; }
+  .head.pop svg { animation: pop .4s ease-out; }
+  .head.shrug svg { animation: shrug .35s ease-out; }
+  @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.22); } 100% { transform: scale(1); } }
+  @keyframes shrug { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-8deg); } 65% { transform: rotate(6deg); } }
+
+  .pot {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    width: min(76px, 86%);
+    height: calc(var(--soil-h) - 26px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .pot::before {
+    content: "";
+    position: absolute; inset: 8px 4px 0;
+    background: var(--pot);
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
+    z-index: -1;
+  }
+  .pot::after {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 10px;
+    background: var(--pot-rim);
+    border-radius: 4px;
+    z-index: -1;
+  }
+  .pot { z-index: 1; isolation: isolate; }
+  .pot-name { font-family: var(--display); font-size: 13px; margin-top: 8px; }
+  .pot-h { font-size: 12px; font-variant-numeric: tabular-nums; opacity: .95; }
+
+  .bubble {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: var(--display);
+    font-size: 18px;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(30,58,50,.12);
+    animation: floatUp 1s ease-out forwards;
+    z-index: 3;
+  }
+  .bubble.pout {
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,.75);
+    box-shadow: none;
+  }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translate(-50%, 8px) scale(.8); }
+    20% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -34px) scale(1); }
+  }
+  .key {
+    position: absolute;
+    top: 10px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--ink-soft);
+    opacity: .7;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(240,246,234,.5);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    z-index: 5;
+    padding-inline: 16px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 22px 22px 18px;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 18px 40px rgba(30,58,50,.18);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card .eyebrow { font-size: 13px; color: var(--ink-soft); letter-spacing: .5px; }
+  .card h2 { font-family: var(--display); font-weight: 400; font-size: 28px; margin: 0; text-wrap: balance; }
+  .card p { margin: 0; line-height: 1.55; color: var(--ink); }
+  .card .rule {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .chip {
+    background: #EEF5EF;
+    border-radius: 999px;
+    padding: 4px 10px;
+    color: var(--ink);
+  }
+  .chip.minus { background: #F7EDEA; }
+  .actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
+  .btn {
+    font-family: var(--display);
+    font-size: 17px;
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn.ghost { background: #EEF5EF; color: var(--ink); }
+  .btn:hover { filter: brightness(1.08); }
+
+  .hint { margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+  .hint kbd {
+    font-family: var(--body);
+    background: rgba(255,255,255,.7);
+    border-radius: 5px;
+    padding: 0 5px;
+    border: 1px solid rgba(30,58,50,.15);
+  }
+
+  @media (max-width: 480px) {
+    :root { --soil-h: 70px; }
+    .ruler { width: 30px; }
+    .gridline { left: 30px; }
+    .beds { left: 30px; right: 4px; }
+    .tick { font-size: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stem, .head, .head .petals, .band { transition: none; }
+    .head.pop svg, .head.shrug svg { animation: none; }
+    .bubble { animation-duration: .01s; animation-delay: .8s; animation-fill-mode: both; }
+  }
+</style>
+
+<div class="app">
+  <header>
+    <h1>칭찬하면 커지는 꽃</h1>
+    <div class="controls">
+      <div class="levels" id="levels" aria-label="단계 선택"></div>
+      <button class="sound" id="sound" aria-pressed="true">소리 켬</button>
+    </div>
+  </header>
+
+  <div class="hud">
+    <div class="timer" id="timer"><div class="timer-fill" id="timerFill"></div></div>
+    <span class="hud-text"><b id="time">30.0</b>초 · 칭찬 <b id="taps">0</b>번</span>
+  </div>
+
+  <main class="stage" id="stage">
+    <div class="ground"></div>
+    <div class="ruler" id="ruler"></div>
+    <div class="beds" id="beds"></div>
+    <div class="overlay" id="overlay"></div>
+  </main>
+
+  <p class="hint">
+    꽃을 누르면 칭찬받은 꽃은 <b>6cm</b> 자라고, 나머지 꽃은 샘이 나서 <b>2cm</b>씩 줄어들어요.
+    모든 꽃이 초록 구간 안에 들어가면 성공입니다. 키보드 <kbd>1</kbd>–<kbd>4</kbd>로도 누를 수 있어요.
+  </p>
+</div>
+
+<script>
+(() => {
+  const MAX = 50, MIN = 4, GROW = 6, SHRINK = 2, BAND = 8, TIME = 30;
+  const FLOWERS = [
+    { name: '봄이', color: '#F06C8F', center: '#FFE3A3' },
+    { name: '해님', color: '#F2B233', center: '#8A5A2B' },
+    { name: '보라', color: '#8E6BDB', center: '#FFE3A3' },
+    { name: '하늘', color: '#3FA0D8', center: '#FFF1BF' },
+  ];
+  const LEVELS = [
+    { n: 2, label: '1단계', desc: '꽃 두 송이' },
+    { n: 3, label: '2단계', desc: '꽃 세 송이' },
+    { n: 4, label: '3단계', desc: '꽃 네 송이' },
+  ];
+  const PRAISE = ['예쁘다!', '최고야!', '멋져!', '쑥쑥 크네', '잘하고 있어', '향기 좋다', '사랑스러워', '반짝반짝!'];
+  const POUT = ['칫', '흥…', '나는?', '쳇'];
+  const MOUTH = {
+    happy: 'M-8 5 Q0 14 8 5',
+    plain: 'M-6 8 Q0 10 6 8',
+    pout: 'M-6 10 Q0 5 6 10',
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const beds = $('beds'), overlay = $('overlay'), ruler = $('ruler'), stage = $('stage');
+  const timeEl = $('time'), tapsEl = $('taps'), timerFill = $('timerFill'), timerBox = $('timer');
+
+  const S = {
+    level: 0, start: [], h: [], bands: [], running: false, over: false,
+    taps: 0, t0: 0, left: TIME, raf: 0, sound: true,
+  };
+
+  // ---------- storage (best times) ----------
+  function loadBest() {
+    try { return JSON.parse(localStorage.getItem('praise-flowers-best') || '{}') || {}; } catch { return {}; }
+  }
+  function saveBest(b) {
+    try { localStorage.setItem('praise-flowers-best', JSON.stringify(b)); } catch {}
+  }
+
+  // ---------- sound ----------
+  let actx = null;
+  function tone(freq, dur = .18, when = 0, vol = .07, type = 'sine') {
+    if (!S.sound) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const t = actx.currentTime + when;
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(vol, t + .015);
+      g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g).connect(actx.destination);
+      o.start(t); o.stop(t + dur + .02);
+    } catch {}
+  }
+
+  // ---------- puzzle ----------
+  const randInt = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  function applyTap(h, i) {
+    return h.map((v, j) => j === i ? Math.min(MAX, v + GROW) : Math.max(MIN, v - SHRINK));
+  }
+  function makePuzzle(n) {
+    for (let a = 0; a < 2000; a++) {
+      const base = n === 4 ? 18 : n === 3 ? 14 : 12;
+      const start = Array.from({ length: n }, () => randInt(base - 3, base + 3));
+      const w = Array.from({ length: n }, () => .15 + Math.random());
+      const total = w.reduce((s, x) => s + x, 0);
+      let h = start.slice();
+      const steps = randInt(3 * n + 2, 5 * n + 2);
+      for (let s = 0; s < steps; s++) {
+        let r = Math.random() * total, i = 0;
+        while (r > w[i]) { r -= w[i]; i++; }
+        h = applyTap(h, Math.min(i, n - 1));
+      }
+      if (h.some(v => v < 10 || v > 44)) continue;
+      const bands = h.map(v => {
+        let low = v - randInt(1, BAND - 1);
+        low = Math.max(MIN + 2, Math.min(MAX - BAND, low));
+        return [low, low + BAND];
+      });
+      if (start.some((v, i) => v >= bands[i][0] && v <= bands[i][1])) continue;
+      const lows = bands.map(b => b[0]);
+      if (Math.max(...lows) - Math.min(...lows) < 6) continue;
+      return { start, bands };
+    }
+    // fallback: always-solvable simple layout
+    const start = Array(n).fill(12);
+    let h = start.slice();
+    for (let i = 0; i < n; i++) for (let k = 0; k <= i; k++) h = applyTap(h, i);
+    return { start, bands: h.map(v => [Math.max(MIN, v - 4), Math.max(MIN, v - 4) + BAND]) };
+  }
+
+  // ---------- building ----------
+  function flowerSVG(f) {
+    let petals = '';
+    for (let k = 0; k < 8; k++) {
+      petals += `<ellipse cx="0" cy="-25" rx="13" ry="24" transform="rotate(${k * 45})" fill="${f.color}"/>`;
+    }
+    return `<svg viewBox="-50 -50 100 100" aria-hidden="true">
+      <g class="petals">${petals}</g>
+      <circle r="21" fill="${f.center}"/>
+      <circle class="cheek" cx="-12" cy="5" r="4.5" fill="#F4839F"/>
+      <circle class="cheek" cx="12" cy="5" r="4.5" fill="#F4839F"/>
+      <circle cx="-7" cy="-3" r="2.8" fill="#1E3A32"/>
+      <circle cx="7" cy="-3" r="2.8" fill="#1E3A32"/>
+      <path class="mouth" d="${MOUTH.plain}" stroke="#1E3A32" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  function buildRuler() {
+    ruler.innerHTML = '';
+    stage.querySelectorAll('.gridline').forEach(g => g.remove());
+    for (let v = 0; v <= MAX; v += 10) {
+      const t = document.createElement('div');
+      t.className = 'tick';
+      t.style.bottom = (v / MAX * 100) + '%';
+      t.textContent = v === 0 ? '0' : v + '';
+      ruler.appendChild(t);
+    }
+    const unit = document.createElement('div');
+    unit.className = 'tick';
+    unit.style.bottom = 'calc(100% + 20px)';
+    unit.textContent = 'cm';
+    ruler.appendChild(unit);
+  }
+
+  function buildBeds() {
+    const n = LEVELS[S.level].n;
+    beds.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+      const f = FLOWERS[i];
+      const b = document.createElement('button');
+      b.className = 'bed';
+      b.id = 'bed' + i;
+      b.setAttribute('aria-label', `${f.name} 칭찬하기`);
+      b.innerHTML = `
+        <span class="key">${i + 1}</span>
+        <div class="zone">
+          <div class="band"><span class="band-label"></span></div>
+          <div class="stem"><span class="leaf l"></span><span class="leaf r"></span></div>
+          <div class="head">${flowerSVG(f)}</div>
+        </div>
+        <div class="pot"><span class="pot-name">${f.name}</span><span class="pot-h"></span></div>`;
+      b.addEventListener('pointerdown', (e) => { e.preventDefault(); tap(i); });
+      b.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(i); }
+      });
+      beds.appendChild(b);
+    }
+  }
+
+  function inBand(i) { return S.h[i] >= S.bands[i][0] && S.h[i] <= S.bands[i][1]; }
+
+  function paint() {
+    S.h.forEach((v, i) => {
+      const b = $('bed' + i);
+      const [lo, hi] = S.bands[i];
+      const pct = v / MAX * 100;
+      const band = b.querySelector('.band');
+      band.style.bottom = (lo / MAX * 100) + '%';
+      band.style.height = ((hi - lo) / MAX * 100) + '%';
+      b.querySelector('.band-label').textContent = `${lo}–${hi}cm`;
+      b.querySelector('.stem').style.height = pct + '%';
+      b.querySelector('.head').style.bottom = pct + '%';
+      b.querySelector('.pot-h').textContent = v + 'cm';
+      const ok = inBand(i);
+      b.classList.toggle('ok', ok);
+      b.dataset.mouth = b.dataset.mouth || 'plain';
+      if (b.dataset.mouthLock !== '1') {
+        b.querySelector('.mouth').setAttribute('d', ok ? MOUTH.happy : MOUTH.plain);
+      }
+      b.disabled = !S.running;
+      b.setAttribute('aria-label', `${FLOWERS[i].name} 칭찬하기, 지금 ${v}cm, 목표 ${lo}에서 ${hi}cm`);
+    });
+    tapsEl.textContent = S.taps;
+  }
+
+  function paintTimer() {
+    timeEl.textContent = Math.max(0, S.left).toFixed(1);
+    timerFill.style.transform = `scaleX(${Math.max(0, S.left) / TIME})`;
+    timerBox.classList.toggle('low', S.left <= 10);
+  }
+
+  function bubble(i, text, pout) {
+    const b = $('bed' + i);
+    const el = document.createElement('div');
+    el.className = 'bubble' + (pout ? ' pout' : '');
+    el.textContent = text;
+    if (!pout) el.style.color = FLOWERS[i].color;
+    el.style.bottom = `calc(${S.h[i] / MAX * 100}% + ${pout ? 30 : 42}px)`;
+    b.querySelector('.zone').appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+
+  function flash(i, cls) {
+    const head = $('bed' + i).querySelector('.head');
+    head.classList.remove('pop', 'shrug');
+    void head.offsetWidth;
+    head.classList.add(cls);
+  }
+
+  function pout(i) {
+    const b = $('bed' + i);
+    b.dataset.mouthLock = '1';
+    b.querySelector('.mouth').setAttribute('d', MOUTH.pout);
+    clearTimeout(b._t);
+    b._t = setTimeout(() => {
+      b.dataset.mouthLock = '0';
+      b.querySelector('.mouth').setAttribute('d', inBand(i) ? MOUTH.happy : MOUTH.plain);
+    }, 450);
+  }
+
+  // ---------- game flow ----------
+  function tap(i) {
+    if (!S.running || i >= S.h.length) return;
+    S.h = applyTap(S.h, i);
+    S.taps++;
+    tone([523, 659, 784, 880][i], .2);
+    bubble(i, PRAISE[randInt(0, PRAISE.length - 1)], false);
+    flash(i, 'pop');
+    S.h.forEach((_, j) => {
+      if (j === i) return;
+      flash(j, 'shrug');
+      pout(j);
+      if (S.h.length <= 3 || Math.random() < .5) bubble(j, POUT[randInt(0, POUT.length - 1)], true);
+    });
+    paint();
+    if (S.h.every((_, j) => inBand(j))) win();
+  }
+
+  function newPuzzle() {
+    const p = makePuzzle(LEVELS[S.level].n);
+    S.start = p.start; S.bands = p.bands;
+  }
+
+  function reset() {
+    cancelAnimationFrame(S.raf);
+    S.h = S.start.slice();
+    S.taps = 0; S.left = TIME; S.running = false;
+    buildBeds();
+    paint(); paintTimer();
+  }
+
+  function setLevel(l, fresh = true) {
+    S.level = l;
+    document.querySelectorAll('#levels button').forEach((b, k) => b.setAttribute('aria-pressed', k === l ? 'true' : 'false'));
+    if (fresh) newPuzzle();
+    reset();
+    showIntro();
+  }
+
+  function begin() {
+    overlay.hidden = true;
+    S.h = S.start.slice();
+    S.taps = 0; S.left = TIME; S.running = true;
+    S.t0 = performance.now();
+    paint(); paintTimer();
+    tone(660, .12); tone(880, .16, .1);
+    $('bed0').focus({ preventScroll: true });
+    const loop = (now) => {
+      if (!S.running) return;
+      S.left = TIME - (now - S.t0) / 1000;
+      paintTimer();
+      if (S.left <= 0) { lose(); return; }
+      S.raf = requestAnimationFrame(loop);
+    };
+    S.raf = requestAnimationFrame(loop);
+  }
+
+  function stop() {
+    S.running = false;
+    cancelAnimationFrame(S.raf);
+    paint();
+  }
+
+  function win() {
+    stop();
+    const left = Math.max(0, S.left);
+    const best = loadBest();
+    const key = 'L' + S.level;
+    const isBest = !(best[key] >= left);
+    if (isBest) { best[key] = +left.toFixed(1); saveBest(best); }
+    [523, 659, 784, 1047].forEach((f, k) => tone(f, .3, k * .09, .06, 'triangle'));
+    const last = S.level === LEVELS.length - 1;
+    setTimeout(() => {
+      card({
+        eyebrow: `${LEVELS[S.level].label} · ${LEVELS[S.level].desc}`,
+        title: last ? '꽃밭 완성!' : '성공!',
+        body: `<p>${left.toFixed(1)}초를 남기고 칭찬 ${S.taps}번으로 모두 맞췄어요.</p>
+               <p style="font-size:13px;color:var(--ink-soft)">${isBest ? '이 단계 최고 기록이에요.' : `이 단계 최고 기록: ${best[key].toFixed(1)}초 남김`}</p>`,
+        actions: last
+          ? [['처음 단계부터', () => setLevel(0)], ['새 꽃밭 다시', () => { newPuzzle(); reset(); begin(); }, true]]
+          : [['다음 단계', () => { setLevel(S.level + 1); }], ['새 꽃밭 다시', () => { newPuzzle(); reset(); begin(); }, true]],
+      });
+    }, 650);
+  }
+
+  function lose() {
+    S.left = 0; paintTimer();
+    stop();
+    tone(392, .25, 0, .06, 'triangle'); tone(330, .35, .15, .06, 'triangle');
+    const ok = S.h.filter((_, j) => inBand(j)).length;
+    card({
+      eyebrow: `${LEVELS[S.level].label} · ${LEVELS[S.level].desc}`,
+      title: '시간이 다 됐어요',
+      body: `<p>${S.h.length}송이 중 ${ok}송이가 구간에 들어갔어요. 한 송이만 챙기면 다른 꽃이 줄어드니, 번갈아 칭찬해 보세요.</p>`,
+      actions: [['같은 꽃밭 다시', () => { reset(); begin(); }], ['새 꽃밭', () => { newPuzzle(); reset(); begin(); }, true]],
+    });
+  }
+
+  function showIntro() {
+    const lv = LEVELS[S.level];
+    card({
+      eyebrow: `${lv.label} · ${lv.desc}`,
+      title: '모든 꽃을 초록 구간에',
+      body: `<p>30초 안에 모든 꽃의 키를 점선 구간에 맞춰 주세요.</p>
+             <div class="rule"><span class="chip">누른 꽃 +${GROW}cm</span><span class="chip minus">다른 꽃 −${SHRINK}cm</span></div>`,
+      actions: [['시작', begin]],
+    });
+  }
+
+  function card({ eyebrow, title, body, actions }) {
+    overlay.innerHTML = `<div class="card" role="dialog" aria-live="polite">
+      <div class="eyebrow">${eyebrow}</div><h2>${title}</h2>${body}<div class="actions"></div></div>`;
+    const box = overlay.querySelector('.actions');
+    actions.forEach(([label, fn, ghost]) => {
+      const b = document.createElement('button');
+      b.className = 'btn' + (ghost ? ' ghost' : '');
+      b.textContent = label;
+      b.addEventListener('click', fn);
+      box.appendChild(b);
+    });
+    overlay.hidden = false;
+    box.querySelector('button').focus({ preventScroll: true });
+  }
+
+  // ---------- controls ----------
+  const lvBox = $('levels');
+  LEVELS.forEach((lv, k) => {
+    const b = document.createElement('button');
+    b.textContent = lv.label;
+    b.title = lv.desc;
+    b.addEventListener('click', () => setLevel(k));
+    lvBox.appendChild(b);
+  });
+  $('sound').addEventListener('click', (e) => {
+    S.sound = !S.sound;
+    e.currentTarget.setAttribute('aria-pressed', S.sound ? 'true' : 'false');
+    e.currentTarget.textContent = S.sound ? '소리 켬' : '소리 끔';
+  });
+  document.addEventListener('keydown', (e) => {
+    const k = parseInt(e.key, 10);
+    if (k >= 1 && k <= 4 && S.running) { e.preventDefault(); tap(k - 1); }
+  });
+
+  buildRuler();
+  setLevel(0);
+})();
+</script>
