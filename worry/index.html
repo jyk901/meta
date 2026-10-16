@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>마음길 · 고민 분류 상담</title>
+<style>
+:root{--bg:#f6f3ee;--card:#fffdf9;--ink:#2b2a28;--mute:#7a756c;--line:#e4ddd0;--accent:#4f7a6a;--accent2:#c98b5b;--soft:#e9f0ec;--warn:#b3402a;--warnbg:#fdeee9}
+@media (prefers-color-scheme:dark){:root{--bg:#171917;--card:#202320;--ink:#ece8e0;--mute:#9a958a;--line:#343830;--accent:#7fb3a0;--accent2:#e0a574;--soft:#26332d;--warn:#ff9c85;--warnbg:#3a2420}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 -apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+header h1{font-size:1.6rem;margin:8px 0 2px;letter-spacing:-.02em}
+header p{margin:0;color:var(--mute);font-size:.95rem}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:18px 0 6px;font-size:.88rem}
+.crumbs button{background:none;border:0;color:var(--accent);cursor:pointer;padding:2px 4px;font:inherit;text-decoration:underline}
+.crumbs span{color:var(--mute)}
+.steps{display:flex;gap:6px;margin:12px 0 4px}
+.steps i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.steps i.on{background:var(--accent)}
+h2{font-size:1.15rem;margin:22px 0 4px}
+.sub{color:var(--mute);font-size:.9rem;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:.15s}
+.card:hover,.card:focus-visible{border-color:var(--accent);transform:translateY(-2px);outline:none}
+.card .ic{font-size:1.5rem}
+.card b{display:block;margin-top:4px}
+.card small{display:block;color:var(--mute);line-height:1.4;margin-top:2px}
+.list .card{display:block;width:100%;margin-bottom:8px}
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-top:14px}
+.hits{margin-top:8px}
+.tag{display:inline-block;font-size:.72rem;color:var(--accent);background:var(--soft);border-radius:99px;padding:1px 8px;margin-right:6px}
+textarea{width:100%;min-height:90px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:12px;resize:vertical}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:var(--soft);color:var(--accent)}
+.btn:disabled{opacity:.5}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sess{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:16px}
+.sess .who{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.avatar{width:48px;height:48px;border-radius:50%;background:var(--soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:1.1rem}
+.who b{font-size:1.1rem}.who small{display:block;color:var(--mute)}
+.badge{font-size:.78rem;background:var(--accent2);color:#fff;border-radius:99px;padding:2px 10px;margin-left:8px}
+.sess h3{font-size:.95rem;color:var(--accent);margin:18px 0 4px}
+.sess blockquote{margin:0;padding:10px 14px;border-left:3px solid var(--accent2);background:var(--soft);border-radius:0 10px 10px 0}
+.sess ol,.sess ul{margin:6px 0;padding-left:22px}
+.sess li{margin:4px 0}
+.mine{background:var(--soft);border-radius:10px;padding:10px 14px;font-size:.92rem;color:var(--mute)}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 14px;font:inherit;font-size:.9rem;cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.crisis{background:var(--warnbg);color:var(--warn);border:1px solid var(--warn);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:.92rem}
+.thanks{background:var(--soft);border-radius:12px;padding:14px;margin-top:16px}
+footer{margin-top:36px;color:var(--mute);font-size:.8rem;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🌿 마음길</h1>
+    <p>세상의 고민을 나누어 살피고, 철학자·종교인·심리학자의 지혜로 상담해 드립니다.</p>
+  </header>
+  <div class="steps" id="steps"></div>
+  <div class="crumbs" id="crumbs"></div>
+  <main id="main"></main>
+  <footer>
+    ※ 이 앱은 사상가·상담 이론의 핵심 관점을 바탕으로 한 <b>자기성찰 도우미</b>이며, 의학적 진단이나 전문 심리치료를 대체하지 않습니다. 깊은 우울·불안이 2주 이상 이어지거나 일상이 어렵다면 정신건강 전문가의 도움을 받으세요.<br>
+    ※ 사상가별 설명은 대표 사상의 요지를 정리·의역한 것이며, 본인이 직접 한 말이 아닌 해석이 포함되어 있습니다.<br>
+    <b>긴급 도움:</b> 자살예방상담전화 <b>109</b> (24시간) · 청소년상담전화 <b>1388</b> · 응급 <b>119</b>
+  </footer>
+</div>
+<script src="data.js"></script>
+<script>
+const T = window.THINKERS, TREE = window.WORRY_TREE;
+const $ = s => document.querySelector(s);
+const state = { cat: null, sub: null, leaf: null, story: "", used: [], sessions: [] };
+
+// ── 한국어 조사 처리 ──
+function hasBatchim(str){
+  const c = str.trim().slice(-1).charCodeAt(0);
+  if (c >= 0xAC00 && c <= 0xD7A3) return (c - 0xAC00) % 28 !== 0;
+  return false;
+}
+function rieul(str){ const c = str.trim().slice(-1).charCodeAt(0); return c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 === 8; }
+function josa(word, j){
+  const b = hasBatchim(word);
+  switch(j){
+    case "은": return b ? "은" : "는";
+    case "을": return b ? "을" : "를";
+    case "이": return b ? "이" : "가";
+    case "과": return b ? "과" : "와";
+    case "으로": return (b && !rieul(word)) ? "으로" : "로";
+    default: return j; // 에, 에서 등
+  }
+}
+function fill(tpl, w){
+  return tpl.replace(/\{w\}\{:([^}]+)\}/g, (_, j) => `「${w}」${josa(w, j)}`).replace(/\{w\}/g, `「${w}」`);
+}
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// ── 위기 키워드 ──
+const CRISIS = /(죽고\s*싶|자살|목숨을|스스로\s*끝|자해|살기\s*싫|사라지고\s*싶|극단적)/;
+function crisisHTML(){
+  return `<div class="crisis" role="alert"><b>지금 많이 힘드시군요.</b> 혼자 견디지 마세요. 지금 바로 <b>자살예방상담전화 109</b>(24시간)나 <b>정신건강위기상담 1577-0199</b>, 위급하면 <b>119</b>에 연락해 주세요. 가까운 사람에게 지금의 마음을 알리는 것도 큰 힘이 됩니다.</div>`;
+}
+
+// ── 화면 ──
+function steps(n){ $("#steps").innerHTML = [0,1,2,3].map(i=>`<i class="${i<n?'on':''}"></i>`).join(""); }
+function crumbs(){
+  const c = [`<button data-go="0">처음</button>`];
+  if (state.cat) c.push(`<span>›</span><button data-go="1">${state.cat.name}</button>`);
+  if (state.sub) c.push(`<span>›</span><button data-go="2">${state.sub.name}</button>`);
+  if (state.leaf) c.push(`<span>›</span><span>${state.leaf[0]}</span>`);
+  $("#crumbs").innerHTML = c.join(" ");
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(+b.dataset.go));
+}
+function go(level){
+  if (level <= 0){ state.cat = state.sub = state.leaf = null; }
+  if (level <= 1){ state.sub = state.leaf = null; }
+  if (level <= 2){ state.leaf = null; }
+  state.used = []; state.sessions = []; state.story = "";
+  render();
+}
+function render(){
+  crumbs();
+  if (!state.cat) return renderCats();
+  if (!state.sub) return renderSubs();
+  if (!state.leaf) return renderLeaves();
+  return renderIntake();
+}
+function renderCats(){
+  steps(0);
+  const m = $("#main");
+  m.innerHTML = `<h2>1단계 · 어떤 종류의 고민인가요?</h2><p class="sub">대분류를 고르세요. 아래에서 고민을 직접 검색할 수도 있어요.</p>
+  <div class="grid">${TREE.map(c=>`<button class="card" data-c="${c.id}"><span class="ic">${c.icon}</span><b>${c.name}</b><small>${c.desc}</small></button>`).join("")}</div>
+  <input class="search" id="q" placeholder="🔍 고민 검색 (예: 번아웃, 이별, 비교, 불안)">
+  <div class="hits" id="hits"></div>`;
+  m.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { state.cat = TREE.find(c=>c.id===b.dataset.c); render(); });
+  $("#q").oninput = e => {
+    const q = e.target.value.trim(); const h = $("#hits");
+    if (!q){ h.innerHTML = ""; return; }
+    const res = [];
+    TREE.forEach(c => c.subs.forEach(s => s.leaves.forEach(l => {
+      if ((l[0]+l[1]+s.name+c.name).includes(q)) res.push({c,s,l});
+    })));
+    h.innerHTML = res.slice(0,12).map((r,i)=>`<button class="card list" data-i="${i}"><span class="tag">${r.c.name} › ${r.s.name}</span><b>${r.l[0]}</b><small>${r.l[1]}</small></button>`).join("") || `<p class="sub">검색 결과가 없습니다. 대분류에서 골라보세요.</p>`;
+    h.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const r = res[+b.dataset.i]; state.cat=r.c; state.sub=r.s; state.leaf=r.l; render(); });
+  };
+}
+function renderSubs(){
+  steps(1);
+  $("#main").innerHTML = `<h2>2단계 · ${state.cat.icon} ${state.cat.name} — 어떤 영역인가요?</h2><p class="sub">1차 하위범주를 고르세요.</p>
+  <div class="grid">${state.cat.subs.map((s,i)=>`<button class="card" data-s="${i}"><b>${s.name}</b><small>${s.leaves.map(l=>l[0]).join(" · ")}</small></button>`).join("")}</div>`;
+  document.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { state.sub = state.cat.subs[+b.dataset.s]; render(); });
+}
+function renderLeaves(){
+  steps(2);
+  $("#main").innerHTML = `<h2>3단계 · ${state.sub.name} — 더 구체적으로는요?</h2><p class="sub">2차 하위범주에서 지금 마음에 가장 가까운 고민을 고르세요.</p>
+  <div class="list">${state.sub.leaves.map((l,i)=>`<button class="card" data-l="${i}"><b>${l[0]}</b><small>${l[1]}</small></button>`).join("")}</div>`;
+  document.querySelectorAll("[data-l]").forEach(b => b.onclick = () => { state.leaf = state.sub.leaves[+b.dataset.l]; render(); });
+}
+function renderIntake(){
+  steps(3);
+  const [name, desc] = state.leaf;
+  $("#main").innerHTML = `<h2>4단계 · 「${esc(name)}」</h2><p class="sub">${esc(desc)}</p>
+  <p>원한다면 상황을 조금 더 적어 주세요. (선택 · 이 기기 밖으로 전송되지 않습니다)</p>
+  <textarea id="story" placeholder="언제부터, 어떤 일이 있었는지, 지금 어떤 마음인지 편하게 적어 보세요."></textarea>
+  <div class="row"><button class="btn" id="go1">1차 상담 받기</button></div>
+  <div id="sessions"></div>`;
+  $("#go1").onclick = () => { state.story = $("#story").value.trim(); $("#go1").disabled = true; $("#story").disabled = true; addSession(1, null); };
+}
+
+// ── 상담가 선택 ──
+function pickThinker(reason){
+  const [, , a, b, c] = state.leaf;
+  const cand = [a, b, c].filter(id => !state.used.includes(id));
+  if (!state.used.length) return a;
+  // 후보 소진 시 같은 분류 외 다른 상담가 중에서 선택
+  let pool = cand.length ? cand : Object.keys(T).filter(id => !state.used.includes(id));
+  if (!pool.length) return null;
+  const last = T[state.used[state.used.length - 1]];
+  const want = {
+    action: t => t.style.includes("action"),
+    comfort: t => t.style.includes("comfort"),
+    insight: t => t.style.includes("insight"),
+    reality: t => t.style.includes("reality"),
+    other: t => t.kind !== last.kind
+  }[reason];
+  if (want){ const m = pool.find(id => want(T[id])); if (m) return m; }
+  return pool[0];
+}
+
+function addSession(n, reason){
+  const id = pickThinker(reason);
+  const box = $("#sessions");
+  if (!id){ box.insertAdjacentHTML("beforeend", `<div class="thanks">준비된 상담가의 관점을 모두 나누었습니다. 충분히 이야기하기 어렵다면 가까운 사람이나 전문 상담기관(☎ 1577-0199 정신건강위기상담, 1388 청소년상담)과 이야기해 보세요.</div>`); return; }
+  state.used.push(id);
+  const t = T[id], w = state.leaf[0];
+  const crisis = CRISIS.test(state.story) ? crisisHTML() : "";
+  const lead = {
+    action: "좀 더 실천할 수 있는 방법에 무게를 두고",
+    comfort: "먼저 마음을 위로하는 쪽에 무게를 두고",
+    insight: "한 걸음 더 깊이 들여다보는 쪽에 무게를 두고",
+    reality: "현실을 담담히 바라보는 쪽에 무게를 두고",
+    other: "다른 분야의 관점으로"
+  }[reason];
+  const intro = n === 1
+    ? `먼저 ${esc(t.kind)}의 목소리로 들려드립니다.`
+    : `${n}차 상담입니다. 이전 관점이 충분하지 않았다니 마음을 이해해요. 이번에는 ${lead} 다른 길을 살펴봅니다.`;
+  const html = `<section class="sess">
+    <div class="who"><div class="avatar">${t.name[0]}</div><div><b>${t.name}<span class="badge">${n}차 상담</span></b><small>${esc(t.kind)} · ${esc(t.era)}</small></div></div>
+    <p>${intro}</p>
+    ${state.story ? `<div class="mine">“${esc(state.story.length>160?state.story.slice(0,160)+'…':state.story)}”</div>` : ""}
+    ${crisis}
+    <h3>이 고민을 이렇게 봅니다</h3><p>${esc(fill(t.view, w))}</p>
+    <h3>핵심 가르침</h3><blockquote>${esc(t.core)}</blockquote>
+    <h3>오늘 해볼 수 있는 것</h3><ol>${t.practice.map(p=>`<li>${esc(p)}</li>`).join("")}</ol>
+    <h3>스스로에게 던질 질문</h3><ul>${t.ask.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+    <div class="feedback" id="fb${n}"><b>이 상담이 도움이 되었나요?</b>
+      <div class="row"><button class="btn" data-ok="${n}">도움이 되었어요</button><button class="btn ghost" data-no="${n}">아직 부족해요</button></div></div>
+  </section>`;
+  box.insertAdjacentHTML("beforeend", html);
+  const sec = box.lastElementChild; sec.scrollIntoView({behavior:"smooth", block:"start"});
+  sec.querySelector("[data-ok]").onclick = () => {
+    $("#fb"+n).innerHTML = `<div class="thanks">다행입니다 🌿 오늘 정한 작은 실천 하나만 지켜 보세요. 고민은 한 번에 풀리지 않아도, 매일의 작은 걸음이 마음의 길을 냅니다.<div class="row"><button class="btn ghost" id="again">다른 고민 상담하기</button></div></div>`;
+    $("#again").onclick = () => go(0);
+  };
+  sec.querySelector("[data-no]").onclick = () => {
+    $("#fb"+n).innerHTML = `<b>어떤 점이 아쉬웠나요? 아쉬운 점에 맞춰 다른 상담가를 연결해 드릴게요.</b>
+      <div class="chips">
+        <button class="chip" data-r="action">너무 추상적이에요 · 구체적 방법이 필요해요</button>
+        <button class="chip" data-r="comfort">위로·공감이 더 필요해요</button>
+        <button class="chip" data-r="insight">제 상황을 더 깊이 이해해 주세요</button>
+        <button class="chip" data-r="reality">현실적이고 냉정한 조언이 필요해요</button>
+        <button class="chip" data-r="other">다른 분야(철학·종교·심리학)의 관점으로</button>
+      </div>`;
+    $("#fb"+n).querySelectorAll("[data-r]").forEach(b => b.onclick = () => {
+      $("#fb"+n).innerHTML = `<small class="sub">“${esc(b.textContent)}”를 반영해 ${n+1}차 상담을 준비했습니다.</small>`;
+      addSession(n+1, b.dataset.r);
+    });
+  };
+}
+render();
+</script>
+</body>
+</html>
