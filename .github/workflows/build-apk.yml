@@ -1,0 +1,50 @@
+name: Build APK
+
+on:
+  push:
+    branches: [claude/worry-classification-counseling-app-vc9zni]
+    paths: ['worry/**', 'apk/**', '.github/workflows/build-apk.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Prepare web assets
+        working-directory: apk
+        run: |
+          mkdir -p www
+          cp ../worry/index.html ../worry/data.js www/
+          npm install
+      - name: Generate Android project
+        working-directory: apk
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Build debug APK
+        working-directory: apk/android
+        run: ./gradlew assembleDebug --no-daemon
+      - name: Rename APK
+        run: cp apk/android/app/build/outputs/apk/debug/app-debug.apk maeumgil.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maeumgil-apk
+          path: maeumgil.apk
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "apk-${{ github.run_number }}" maeumgil.apk \
+            --title "마음길 APK #${{ github.run_number }}" \
+            --notes "Android 설치 파일(디버그 서명). 휴대폰에서 maeumgil.apk를 내려받아 설치하세요."
