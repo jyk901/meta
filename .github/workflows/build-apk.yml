@@ -33,6 +33,12 @@ jobs:
           npx cap add android
           npx --yes @capacitor/assets@3 generate --android
           npx cap sync android
+      - name: Use fixed debug signing key and bump version
+        run: |
+          mkdir -p ~/.android
+          cp apk/debug.keystore ~/.android/debug.keystore
+          sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/; s/versionName \"1.0\"/versionName \"1.0.${{ github.run_number }}\"/" apk/android/app/build.gradle
+          grep -n "versionCode\|versionName" apk/android/app/build.gradle
       - name: Build debug APK
         working-directory: apk/android
         run: ./gradlew assembleDebug --no-daemon
