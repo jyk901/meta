@@ -43,15 +43,15 @@ jobs:
         working-directory: apk/android
         run: ./gradlew assembleDebug --no-daemon
       - name: Rename APK
-        run: cp apk/android/app/build/outputs/apk/debug/app-debug.apk maeumgil.apk
+        run: cp apk/android/app/build/outputs/apk/debug/app-debug.apk maeum-sangdamso.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: maeumgil-apk
-          path: maeumgil.apk
+          name: maeum-sangdamso-apk
+          path: maeum-sangdamso.apk
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "apk-${{ github.run_number }}" maeumgil.apk \
-            --title "마음길 APK #${{ github.run_number }}" \
-            --notes "Android 설치 파일(디버그 서명). 휴대폰에서 maeumgil.apk를 내려받아 설치하세요."
+          gh release create "apk-${{ github.run_number }}" maeum-sangdamso.apk \
+            --title "마음 상담소 APK #${{ github.run_number }}" \
+            --notes "Android 설치 파일(디버그 서명). 휴대폰에서 maeum-sangdamso.apk를 내려받아 설치하세요."

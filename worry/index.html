@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마음길 · 고민 분류 상담</title>
+<title>마음 상담소 · 고민 분류 상담</title>
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <style>
@@ -60,7 +60,7 @@ footer{margin-top:36px;color:var(--mute);font-size:.8rem;line-height:1.6;border-
 <body>
 <div class="wrap">
   <header>
-    <h1>🌿 마음길</h1>
+    <h1>🌿 마음 상담소</h1>
     <p>세상의 고민을 나누어 살피고, 철학자·종교인·심리학자의 지혜로 상담해 드립니다.</p>
   </header>
   <div class="steps" id="steps"></div>
@@ -240,7 +240,7 @@ function addSession(n, reason){
   sec.querySelector("[data-ok]").onclick = () => {
     const names = state.sessions.map(x => `${T[x.id].name}(${T[x.id].kind})`).join(" → ");
     const last = state.sessions[state.sessions.length - 1];
-    const summary = `[마음길 상담 요약]\n고민: ${state.cat.name} › ${state.sub.name} › ${w}\n만난 상담가: ${names}\n오늘의 실천: ${last.practice}\n품고 갈 질문: ${last.question}`;
+    const summary = `[마음 상담소 상담 요약]\n고민: ${state.cat.name} › ${state.sub.name} › ${w}\n만난 상담가: ${names}\n오늘의 실천: ${last.practice}\n품고 갈 질문: ${last.question}`;
     $("#fb"+n).innerHTML = `<div class="thanks"><b>오늘의 상담 요약</b>
       <p style="margin:6px 0">${esc(summary).replace(/\n/g,"<br>")}</p>
       <div class="row"><button class="btn" id="copy">요약 복사</button><button class="btn ghost" id="again">다른 고민 상담하기</button></div>
