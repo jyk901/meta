@@ -25,7 +25,7 @@ jobs:
         working-directory: apk
         run: |
           mkdir -p www
-          cp ../worry/index.html ../worry/data.js www/
+          cp ../worry/index.html ../worry/*.js ../worry/icon.png www/
           npm install
       - name: Generate Android project
         working-directory: apk
