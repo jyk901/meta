@@ -1,7 +1,7 @@
 const $ = (id) => document.getElementById(id);
 let cards = [];
 let meta = { brand: "", theme: "sky" };
-let chars = []; // 업로드한 캐릭터 이미지(dataURL)
+let chars = ["character.png"]; // 기본 캐릭터. 파일을 업로드하면 교체됨
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 // **강조** → <b>, 줄바꿈 유지
@@ -109,6 +109,7 @@ $("chars").addEventListener("change", async (e) => {
   chars = await Promise.all([...e.target.files].map((f) => new Promise((ok) => {
     const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f);
   })));
+  if (!chars.length) chars = ["character.png"];
   if (cards.length) render();
 });
 
