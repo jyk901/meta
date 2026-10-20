@@ -24,6 +24,7 @@ function cardHTML(c, i) {
   const pg = `<div class="brand"><i></i>${esc(meta.brand)}</div><div class="pg">${i + 1}/${cards.length}</div>`;
   const kick = c.kicker ? `<div class="kick">${fmt(c.kicker)}</div>` : "";
   const emoji = chars.length ? `<div class="emoji"><img src="${chars[i % chars.length]}"></div>` : c.emoji ? `<div class="emoji">${esc(c.emoji)}</div>` : "";
+  const mascot = chars.length ? `<div class="emoji mascot"><img src="${chars[i % chars.length]}"></div>` : "";
   const body = c.body ? `<div class="body">${fmt(c.body)}</div>` : "";
   const items = (a) => (a || []).map((t) => `<div class="it">${fmt(t)}</div>`).join("");
   let inner;
@@ -31,12 +32,12 @@ function cardHTML(c, i) {
     case "cover":
       inner = `<div class="h">${fmt(c.title)}</div>${kick}${emoji}`; break;
     case "list":
-      inner = `<div class="h">${fmt(c.title)}</div><div class="box">${items(c.items)}</div>${body}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div><div class="box">${items(c.items)}</div>${body}${mascot}`; break;
     case "stat":
-      inner = `${kick}<div class="num">${esc(c.number)}</div><div class="h">${fmt(c.title)}</div>${body}`; break;
+      inner = `${kick}<div class="num">${esc(c.number)}</div><div class="h">${fmt(c.title)}</div>${body}${mascot}`; break;
     case "compare": {
       const col = (x, cls) => `<div class="col ${cls}"><strong>${esc(x?.label)}</strong>${(x?.items || []).map((t) => `<p>• ${fmt(t)}</p>`).join("")}</div>`;
-      inner = `<div class="h">${fmt(c.title)}</div><div class="cols">${col(c.left, "l")}${col(c.right, "r")}</div>${body}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div><div class="cols">${col(c.left, "l")}${col(c.right, "r")}</div>${body}${mascot}`; break;
     }
     case "cta":
       inner = `${kick}<div class="h">${fmt(c.title)}</div><div class="btns">${(c.items || []).map((t) => `<div class="btn">${fmt(t)}</div>`).join("")}</div>${body}${emoji}`; break;
@@ -44,7 +45,7 @@ function cardHTML(c, i) {
       c = { ...c, layout: "statement" };
       inner = `${kick}<div class="h">${fmt(c.title)}</div>${emoji}<div class="bodybox">${body}</div>`;
   }
-  return `<div class="card ${c.layout} ${meta.theme}" data-i="${i}">${pg}${inner}</div>`;
+  return `<div class="card ${c.layout} ${meta.theme}${chars.length ? " hasm" : ""}" data-i="${i}">${pg}${inner}</div>`;
 }
 
 function render() {

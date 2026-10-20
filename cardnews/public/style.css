@@ -92,3 +92,8 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .cta .emoji{font-size:260px;right:70px;bottom:50px}
 .card.statement .brand{color:#fff}
 .emoji img{height:1em;width:auto;display:block}
+.mascot{display:none}
+.hasm .mascot{display:block;font-size:270px;right:60px;bottom:50px}
+.hasm.list .body,.hasm.compare .body{right:400px;text-align:left}
+.hasm.stat .mascot{font-size:250px;bottom:230px}
+.hasm.stat .body{right:100px}
