@@ -8,42 +8,44 @@ const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<
 const fmt = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\n/g, "<br>");
 
 const DEMO = [
-  { layout: "cover", kicker: "꼭 체크해야 될 **활용법**!", title: "AI가 알려준 답\n**정말 맞을까?**", emoji: "🤖" },
-  { layout: "statement", kicker: "AI는 똑똑하지만", title: "**완벽하지** 않습니다", body: "AI는 정확한 답을 찾는 것이 아니라 **가장 가능성 높은 답**을 예측하기 때문에 오류가 발생할 수 있습니다.", emoji: "😵" },
-  { layout: "stat", kicker: "환각 효과", number: "3가지", title: "AI가 틀리는 대표 이유", body: "환각 · 맥락 오류 · 편향" },
-  { layout: "list", title: "AI 시대에 필요한 건 **판단하는 능력**", items: ["AI의 답을 그대로 믿지 않기", "**출처**를 확인하고 검증하기", "상황에 맞게 판단하고 활용하기"], body: "AI를 **검증**하고 **활용**하는 사람" },
-  { layout: "compare", title: "AI를 쓰는 사람 vs **활용하는 사람**", left: { label: "그냥 쓰는 사람", items: ["답을 그대로 복사", "출처 확인 안 함"] }, right: { label: "잘 쓰는 사람", items: ["사실 여부 검증", "수정·보완해서 사용"] }, body: "AI의 답은 정답이 아니라 **초안**입니다." },
-  { layout: "statement", kicker: "질문이 달라지면", title: "**답**이 달라집니다", body: "원하는 결과를 이끌어내는 **질문 능력**이 AI 활용의 출발점입니다.", emoji: "💬" },
-  { layout: "list", title: "AI 활용 **체크리스트**", items: ["목적에 맞는 AI 선택", "답변의 사실 여부 검증", "결과 수정·보완", "여러 정보를 종합해 최종 판단"], body: "검증하고 보완할 때 **비로소 실무**에서 쓸 수 있어요" },
-  { layout: "stat", kicker: "핵심 한 줄", number: "초안", title: "AI의 답은 정답이 아니에요", body: "검증과 보완을 거쳐야 완성됩니다" },
-  { layout: "compare", title: "이렇게 **다릅니다**", left: { label: "Before", items: ["AI 답만 믿는다", "오류를 놓친다"] }, right: { label: "After", items: ["출처로 교차 확인", "근거 있게 활용"] }, body: "판단하는 사람이 **AI를 이깁니다**" },
-  { layout: "cta", kicker: "AI를 사용하는 사람이 아닌", title: "AI를 **활용하는** 사람으로!", items: ["저장해두고 체크리스트로 활용", "친구에게 공유하기"], body: "그 시작을 함께 하세요!", emoji: "🙌" },
+  { layout: "cover", kicker: "꼭 체크할 **활용법**", title: "AI 답, **정말** 맞을까?", illus: ["🤖", "❓"] },
+  { layout: "statement", kicker: "AI는 똑똑하지만", title: "**완벽**하지 않아요", body: "가장 **그럴듯한 답**을 예측할 뿐이에요", illus: ["🎲"] },
+  { layout: "stat", kicker: "AI가 틀리는 이유", number: "3가지", title: "환각·맥락·편향", illus: ["⚠️", "🧩"] },
+  { layout: "list", title: "AI 쓸 때 **체크**", items: ["그대로 믿지 않기", "**출처** 확인하기", "상황에 맞게 판단"], illus: ["✅", "🔍"] },
+  { layout: "compare", title: "쓰기만 vs **활용하기**", left: { label: "쓰기만", items: ["그대로 복사", "출처 무시"] }, right: { label: "활용", items: ["사실 검증", "수정·보완"] }, illus: ["⚖️"] },
+  { layout: "statement", kicker: "질문이 달라지면", title: "**답**이 달라져요", body: "좋은 질문이 좋은 결과를 만들어요", illus: ["💬", "✨"] },
+  { layout: "list", title: "AI 활용 **3단계**", items: ["목적에 맞는 AI 고르기", "사실 여부 검증", "수정하고 보완"], illus: ["🧰", "📝"] },
+  { layout: "stat", kicker: "기억할 한 단어", number: "초안", title: "AI의 답은 정답이 아니에요", illus: ["✏️", "📄"] },
+  { layout: "compare", title: "이렇게 **다릅니다**", left: { label: "Before", items: ["AI 답만 믿음", "오류를 놓침"] }, right: { label: "After", items: ["출처로 확인", "근거 있게 활용"] }, illus: ["🔄"] },
+  { layout: "cta", kicker: "AI를 쓰는 사람에서", title: "AI를 **활용하는** 사람으로!", items: ["저장해두기", "친구에게 공유"], illus: ["🚀", "🙌"] },
 ];
 
 function cardHTML(c, i) {
   const pg = `<div class="brand"><i></i>${esc(meta.brand)}</div><div class="pg">${i + 1}/${cards.length}</div>`;
   const kick = c.kicker ? `<div class="kick">${fmt(c.kicker)}</div>` : "";
-  const emoji = chars.length ? `<div class="emoji"><img src="${chars[i % chars.length]}"></div>` : c.emoji ? `<div class="emoji">${esc(c.emoji)}</div>` : "";
+  const person = chars.length ? `<div class="emoji"><img src="${chars[i % chars.length]}"></div>` : "";
   const mascot = chars.length ? `<div class="emoji mascot"><img src="${chars[i % chars.length]}"></div>` : "";
+  const list = (Array.isArray(c.illus) ? c.illus : c.illus ? [c.illus] : c.emoji ? [c.emoji] : []).slice(0, 2);
+  const illus = list.length ? `<div class="illus">${list.map((e) => `<span>${esc(e)}</span>`).join("")}</div>` : "";
   const body = c.body ? `<div class="body">${fmt(c.body)}</div>` : "";
   const items = (a) => (a || []).map((t) => `<div class="it">${fmt(t)}</div>`).join("");
   let inner;
   switch (c.layout) {
     case "cover":
-      inner = `<div class="h">${fmt(c.title)}</div>${kick}${emoji}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div>${kick}${illus}${person}`; break;
     case "list":
-      inner = `<div class="h">${fmt(c.title)}</div><div class="box">${items(c.items)}</div>${body}${mascot}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div><div class="box">${items(c.items)}</div>${illus}${mascot}`; break;
     case "stat":
-      inner = `${kick}<div class="num">${esc(c.number)}</div><div class="h">${fmt(c.title)}</div>${body}${mascot}`; break;
+      inner = `${kick}<div class="num">${esc(c.number)}</div><div class="h">${fmt(c.title)}</div>${illus}${mascot}`; break;
     case "compare": {
       const col = (x, cls) => `<div class="col ${cls}"><strong>${esc(x?.label)}</strong>${(x?.items || []).map((t) => `<p>• ${fmt(t)}</p>`).join("")}</div>`;
-      inner = `<div class="h">${fmt(c.title)}</div><div class="cols">${col(c.left, "l")}${col(c.right, "r")}</div>${body}${mascot}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div><div class="cols">${col(c.left, "l")}${col(c.right, "r")}</div>${illus}${mascot}`; break;
     }
     case "cta":
-      inner = `${kick}<div class="h">${fmt(c.title)}</div><div class="btns">${(c.items || []).map((t) => `<div class="btn">${fmt(t)}</div>`).join("")}</div>${body}${emoji}`; break;
+      inner = `${kick}<div class="h">${fmt(c.title)}</div><div class="btns">${(c.items || []).map((t) => `<div class="btn">${fmt(t)}</div>`).join("")}</div>${illus}${person}`; break;
     default:
       c = { ...c, layout: "statement" };
-      inner = `${kick}<div class="h">${fmt(c.title)}</div>${emoji}<div class="bodybox">${body}</div>`;
+      inner = `${kick}<div class="h">${fmt(c.title)}</div>${person}<div class="bodybox">${illus}${body}</div>`;
   }
   return `<div class="card ${c.layout} ${meta.theme}${chars.length ? " hasm" : ""}" data-i="${i}">${pg}${inner}</div>`;
 }
@@ -57,23 +59,23 @@ function overflows(card) {
   const y = (el, edge) => (el.getBoundingClientRect()[edge] - top) / scale;
   const q = (sel) => card.querySelector(sel);
   const layout = [...card.classList].find((c) => ["cover", "statement", "list", "stat", "compare", "cta"].includes(c));
-  const hasm = card.classList.contains("hasm");
   const gap = 24;
   // 가로로 삐져나온 글
   for (const el of card.querySelectorAll(".h,.it,.btn,.col p,.num,.kick")) if (el.scrollWidth > el.clientWidth + 1) return true;
-  const h = q(".h"), body = q(".body"), box = q(".box") || q(".cols") || q(".btns");
+  const h = q(".h"), body = q(".body"), illus = q(".illus");
   if (h && y(h, "bottom") > 1290) return true;
   if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") ? 750 : 1250)) return true;
   if (layout === "statement") {
     const bb = q(".bodybox");
     if (h && y(h, "bottom") > y(bb, "top") - gap) return true;
-    if (body && body.offsetHeight > bb.clientHeight - 100) return true;
+    if (body && body.offsetHeight > bb.clientHeight - 120) return true;
   }
-  if (layout === "list" || layout === "compare" || layout === "cta") {
-    if (box && body && y(box, "bottom") > y(body, "top") - gap) return true;
-    if (box && hasm && layout !== "cta" && y(box, "bottom") > 950) return true;
+  // 아래쪽 그림·캐릭터 띠(약 940px부터) 위에서 글이 끝나야 함
+  if (layout === "list" || layout === "compare" || layout === "cta" || layout === "stat") {
+    const last = layout === "stat" ? h : q(".box") || q(".cols") || q(".btns");
+    const limit = illus ? Math.min(y(illus, "top") - gap, 940) : 1290;
+    if (last && y(last, "bottom") > limit) return true;
   }
-  if (layout === "stat" && h && body && y(h, "bottom") > y(body, "top") - gap) return true;
   return false;
 }
 function fit(card) {
@@ -95,16 +97,16 @@ function render() {
   fitAll();
 }
 
-const FIELDS = [["kicker", "작은 문구"], ["title", "제목"], ["number", "큰 숫자"], ["body", "본문"], ["items", "항목 (줄바꿈으로 구분)"]];
+const FIELDS = [["kicker", "작은 문구"], ["title", "제목"], ["number", "큰 숫자"], ["body", "본문"], ["items", "항목 (줄바꿈으로 구분)"], ["illus", "그림 (이모지 1~2개)"]];
 let editing = -1;
 
 function openEditor(i) {
   editing = i;
   const c = cards[i];
   $("editTitle").textContent = `${i + 1}번 카드 · ${c.layout}`;
-  $("fields").innerHTML = FIELDS.filter(([k]) => k in c || k === "title")
+  $("fields").innerHTML = FIELDS.filter(([k]) => k in c || k === "title" || k === "illus")
     .map(([k, label]) => {
-      const v = Array.isArray(c[k]) ? c[k].join("\n") : c[k] ?? "";
+      const v = Array.isArray(c[k]) ? c[k].join(k === "illus" ? "" : "\n") : c[k] ?? "";
       return `<label>${label}<textarea data-k="${k}" rows="${k === "title" || k === "body" || k === "items" ? 3 : 1}">${esc(v)}</textarea></label>`;
     }).join("");
   $("editor").showModal();
@@ -113,7 +115,7 @@ function openEditor(i) {
 $("fields").addEventListener("input", (e) => {
   const k = e.target.dataset.k;
   if (!k || editing < 0) return;
-  cards[editing][k] = k === "items" ? e.target.value.split("\n").filter(Boolean) : e.target.value;
+  cards[editing][k] = k === "items" ? e.target.value.split("\n").filter(Boolean) : k === "illus" ? [...new Intl.Segmenter().segment(e.target.value.replace(/\s/g, ""))].map((x) => x.segment).slice(0, 2) : e.target.value;
   const th = document.querySelector(`.thumb[data-i="${editing}"]`);
   th.querySelector(".card").outerHTML = cardHTML(cards[editing], editing);
   fit(th.querySelector(".card"));

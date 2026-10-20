@@ -99,3 +99,26 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .hasm.stat .mascot{font-size:270px;bottom:235px}
 .hasm.stat .body{right:100px}
 .statement .kick{max-width:660px}
+
+.illus{position:absolute;display:flex;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.illus span{filter:drop-shadow(0 10px 12px rgba(0,0,0,.2))}
+.list .illus,.compare .illus,.stat .illus,.cta .illus{left:70px;bottom:80px;font-size:230px;gap:6px}
+.cover .illus{inset:0}
+.cover .illus span{position:absolute}
+.cover .illus span:nth-child(1){left:80px;bottom:300px;font-size:250px;transform:rotate(-8deg)}
+.cover .illus span:nth-child(2){right:70px;bottom:400px;font-size:190px;transform:rotate(10deg)}
+.statement .illus{position:static;font-size:200px;flex:none;margin-right:36px}
+.statement .bodybox{gap:10px}
+.statement .body{text-align:left;font-size:52px;line-height:1.4}
+.list .it{font-size:66px;gap:30px}
+.list .it::before{width:78px;height:78px;font-size:54px}
+.list .box{gap:46px;padding:70px 56px}
+.compare .col p{font-size:56px}
+.compare .col strong{font-size:64px}
+.compare .col{min-height:460px;padding:50px 36px}
+.cta .btn{font-size:62px;padding:34px 60px}
+.cta .btns{gap:34px}
+.cta .kick{margin-top:120px}
+.cta .h{font-size:120px}
+.cta .btns{margin-top:46px;gap:26px}
+.cta .btn{font-size:54px;padding:26px 54px}
