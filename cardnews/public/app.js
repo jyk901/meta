@@ -48,12 +48,51 @@ function cardHTML(c, i) {
   return `<div class="card ${c.layout} ${meta.theme}${chars.length ? " hasm" : ""}" data-i="${i}">${pg}${inner}</div>`;
 }
 
+
+// ───── 글이 넘치면 글자 크기를 줄여 카드 안에 맞춤 ─────
+const TEXT_SEL = ".h,.kick,.body,.num,.it,.btn,.col p,.col strong";
+function overflows(card) {
+  const scale = card.getBoundingClientRect().width / 1080;
+  const top = card.getBoundingClientRect().top;
+  const y = (el, edge) => (el.getBoundingClientRect()[edge] - top) / scale;
+  const q = (sel) => card.querySelector(sel);
+  const layout = [...card.classList].find((c) => ["cover", "statement", "list", "stat", "compare", "cta"].includes(c));
+  const hasm = card.classList.contains("hasm");
+  const gap = 24;
+  // 가로로 삐져나온 글
+  for (const el of card.querySelectorAll(".h,.it,.btn,.col p,.num,.kick")) if (el.scrollWidth > el.clientWidth + 1) return true;
+  const h = q(".h"), body = q(".body"), box = q(".box") || q(".cols") || q(".btns");
+  if (h && y(h, "bottom") > 1290) return true;
+  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") ? 800 : 1250)) return true;
+  if (layout === "statement") {
+    const bb = q(".bodybox");
+    if (h && y(h, "bottom") > y(bb, "top") - gap) return true;
+    if (body && body.offsetHeight > bb.clientHeight - 100) return true;
+  }
+  if (layout === "list" || layout === "compare" || layout === "cta") {
+    if (box && body && y(box, "bottom") > y(body, "top") - gap) return true;
+    if (box && hasm && layout === "list" && y(box, "bottom") > 1000) return true;
+  }
+  if (layout === "stat" && h && body && y(h, "bottom") > y(body, "top") - gap) return true;
+  return false;
+}
+function fit(card) {
+  const els = [...card.querySelectorAll(TEXT_SEL)];
+  const base = els.map((el) => parseFloat(getComputedStyle(el).fontSize));
+  for (let f = 1; f >= 0.5; f -= 0.04) {
+    els.forEach((el, i) => (el.style.fontSize = base[i] * f + "px"));
+    if (!overflows(card)) return;
+  }
+}
+const fitAll = () => document.fonts.ready.then(() => document.querySelectorAll("#grid .card").forEach(fit));
+
 function render() {
   $("grid").innerHTML = cards
     .map((c, i) => `<div class="thumb" data-i="${i}">${cardHTML(c, i)}</div>`)
     .join("");
   $("count").textContent = `${cards.length}장 완성`;
   $("result").hidden = false;
+  fitAll();
 }
 
 const FIELDS = [["kicker", "작은 문구"], ["title", "제목"], ["number", "큰 숫자"], ["body", "본문"], ["items", "항목 (줄바꿈으로 구분)"]];
@@ -77,6 +116,7 @@ $("fields").addEventListener("input", (e) => {
   cards[editing][k] = k === "items" ? e.target.value.split("\n").filter(Boolean) : e.target.value;
   const th = document.querySelector(`.thumb[data-i="${editing}"]`);
   th.querySelector(".card").outerHTML = cardHTML(cards[editing], editing);
+  fit(th.querySelector(".card"));
 });
 
 $("grid").addEventListener("click", (e) => {

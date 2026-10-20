@@ -26,7 +26,10 @@ layout 종류와 필드:
 
 공통 규칙:
 - title/kicker/body/items 안에서 강조할 핵심 단어는 **이렇게** 감싸세요 (카드당 1~2곳).
-- 문장은 짧고 임팩트 있게. 한 카드에 글이 너무 많으면 안 됩니다.
+- 문장은 짧고 임팩트 있게. 한 카드에 글이 너무 많으면 안 됩니다. 글자 수 상한(공백 포함):
+  cover title 22자, statement title 18자·body 70자, list title 22자·item 각 22자·body 30자,
+  stat number 6자·title 20자·body 30자, compare title 22자·label 8자·item 각 14자·body 28자,
+  cta title 22자·item 각 20자·body 24자, kicker 20자.
 - 사실 확인이 안 되는 통계·인용·기관명은 만들어내지 마세요.
 - emoji는 내용과 어울리는 이모지 1개.
 - 출력은 {"cards":[...10개...]} 형태의 JSON 하나뿐. 설명·코드블록 금지.`;

@@ -75,7 +75,7 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .card.compare{background:linear-gradient(180deg,var(--soft),#fff)}
 .compare .h{font-size:108px;margin-top:150px;text-align:center}
 .compare .cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:60px}
-.compare .col{border:4px solid #333;border-radius:36px;padding:44px 34px;background:#fff;min-height:520px}
+.compare .col{border:4px solid #333;border-radius:36px;padding:44px 34px;background:#fff;min-height:430px}
 .compare .col.r{background:var(--a);color:#fff;border-color:var(--a)}
 .compare .col strong{display:block;font-size:56px;font-weight:900;margin-bottom:26px;text-align:center}
 .compare .col p{margin:0 0 22px;font-size:44px;font-weight:700;line-height:1.35}
@@ -97,3 +97,4 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .hasm.list .body,.hasm.compare .body{right:430px;text-align:left}
 .hasm.stat .mascot{font-size:250px;bottom:230px}
 .hasm.stat .body{right:100px}
+.statement .kick{max-width:660px}
