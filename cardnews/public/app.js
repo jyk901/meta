@@ -71,7 +71,7 @@ function overflows(card) {
   }
   if (layout === "list" || layout === "compare" || layout === "cta") {
     if (box && body && y(box, "bottom") > y(body, "top") - gap) return true;
-    if (box && hasm && layout === "list" && y(box, "bottom") > 1000) return true;
+    if (box && hasm && layout !== "cta" && y(box, "bottom") > 950) return true;
   }
   if (layout === "stat" && h && body && y(h, "bottom") > y(body, "top") - gap) return true;
   return false;

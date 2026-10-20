@@ -52,7 +52,7 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .statement .kick{color:var(--cream);margin-top:150px;font-size:56px;font-weight:700}
 .statement .h{color:#fff;font-size:150px;margin-top:20px;width:720px}
 .statement .h b{background:linear-gradient(180deg,var(--a2),#fff);-webkit-background-clip:text;color:transparent}
-.statement .emoji{font-size:300px;right:70px;top:170px}
+.statement .emoji{font-size:400px;right:70px;top:170px}
 .statement .bodybox{position:absolute;left:0;right:0;bottom:0;height:430px;background:var(--cream);padding:70px 90px;text-align:center;display:flex;align-items:center;justify-content:center}
 .statement .body{font-size:50px;font-weight:500}.statement .body b{color:var(--a)}
 
@@ -75,7 +75,7 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .card.compare{background:linear-gradient(180deg,var(--soft),#fff)}
 .compare .h{font-size:108px;margin-top:150px;text-align:center}
 .compare .cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:60px}
-.compare .col{border:4px solid #333;border-radius:36px;padding:44px 34px;background:#fff;min-height:430px}
+.compare .col{border:4px solid #333;border-radius:36px;padding:44px 34px;background:#fff;min-height:380px}
 .compare .col.r{background:var(--a);color:#fff;border-color:var(--a)}
 .compare .col strong{display:block;font-size:56px;font-weight:900;margin-bottom:26px;text-align:center}
 .compare .col p{margin:0 0 22px;font-size:44px;font-weight:700;line-height:1.35}
@@ -88,13 +88,13 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .cta .h b{color:#fff;-webkit-text-stroke:0;text-shadow:0 6px 0 rgba(0,0,0,.25)}
 .cta .btns{margin-top:70px;display:flex;flex-direction:column;gap:26px;align-items:center}
 .cta .btn{background:#fff;border:4px solid #111;border-radius:30px;padding:28px 54px;font-size:52px;font-weight:900;box-shadow:0 10px 0 rgba(0,0,0,.2)}
-.cta .body{position:absolute;left:80px;right:400px;bottom:90px;text-align:left;font-size:54px;font-weight:900}
-.cta .emoji{font-size:340px;right:70px;bottom:50px}
+.cta .body{position:absolute;left:80px;right:330px;bottom:90px;text-align:left;font-size:54px;font-weight:900}
+.cta .emoji{font-size:430px;right:70px;bottom:50px}
 .card.statement .brand{color:#fff}
 .emoji img{height:1em;width:auto;display:block}
 .mascot{display:none}
-.hasm .mascot{display:block;font-size:340px;right:60px;bottom:50px}
-.hasm.list .body,.hasm.compare .body{right:430px;text-align:left}
-.hasm.stat .mascot{font-size:250px;bottom:230px}
+.hasm .mascot{display:block;font-size:380px;right:60px;bottom:50px}
+.hasm.list .body,.hasm.compare .body{right:330px;text-align:left}
+.hasm.stat .mascot{font-size:270px;bottom:235px}
 .hasm.stat .body{right:100px}
 .statement .kick{max-width:660px}
