@@ -31,25 +31,27 @@ function cardHTML(c, i) {
   const mascot = on ? `<div class="emoji mascot"><img src="${chars[i % chars.length]}"></div>` : "";
   const list = (Array.isArray(c.illus) ? c.illus : c.illus ? [c.illus] : c.emoji ? [c.emoji] : []).slice(0, 2);
   const illus = list.length ? `<div class="illus">${list.map((e) => `<span>${esc(e)}</span>`).join("")}</div>` : "";
+  const photo = c.photo ? `<div class="photo"><img src="${c.photo}" alt=""></div>` : "";
+  const art = photo || illus; // 사진이 있으면 이모지 그림 대신 사용
   const body = c.body ? `<div class="body">${fmt(c.body)}</div>` : "";
   const items = (a) => (a || []).map((t) => `<div class="it">${fmt(t)}</div>`).join("");
   let inner;
   switch (c.layout) {
     case "cover":
-      inner = `<div class="h">${fmt(c.title)}</div>${kick}${illus}${person}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div>${kick}${art}${person}`; break;
     case "list":
-      inner = `<div class="h">${fmt(c.title)}</div><div class="box">${items(c.items)}</div>${illus}${mascot}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div><div class="box">${items(c.items)}</div>${art}${mascot}`; break;
     case "stat":
-      inner = `${kick}<div class="num">${esc(c.number)}</div><div class="h">${fmt(c.title)}</div>${illus}${mascot}`; break;
+      inner = `${kick}<div class="num">${esc(c.number)}</div><div class="h">${fmt(c.title)}</div>${art}${mascot}`; break;
     case "compare": {
       const col = (x, cls) => `<div class="col ${cls}"><strong>${esc(x?.label)}</strong>${(x?.items || []).map((t) => `<p>• ${fmt(t)}</p>`).join("")}</div>`;
-      inner = `<div class="h">${fmt(c.title)}</div><div class="cols">${col(c.left, "l")}${col(c.right, "r")}</div>${illus}${mascot}`; break;
+      inner = `<div class="h">${fmt(c.title)}</div><div class="cols">${col(c.left, "l")}${col(c.right, "r")}</div>${art}${mascot}`; break;
     }
     case "cta":
-      inner = `${kick}<div class="h">${fmt(c.title)}</div><div class="btns">${(c.items || []).map((t) => `<div class="btn">${fmt(t)}</div>`).join("")}</div>${illus}${person}`; break;
+      inner = `${kick}<div class="h">${fmt(c.title)}</div><div class="btns">${(c.items || []).map((t) => `<div class="btn">${fmt(t)}</div>`).join("")}</div>${art}${person}`; break;
     default:
       c = { ...c, layout: "statement" };
-      inner = `${kick}<div class="h">${fmt(c.title)}</div>${person}<div class="bodybox">${illus}${body}</div>`;
+      inner = `${kick}<div class="h">${fmt(c.title)}</div>${person}<div class="bodybox">${art}${body}</div>`;
   }
   return `<div class="card ${c.layout} ${meta.theme}${on ? " hasm" : " nochar"}" data-i="${i}">${pg}${inner}</div>`;
 }
@@ -66,9 +68,9 @@ function overflows(card) {
   const gap = 24;
   // 가로로 삐져나온 글
   for (const el of card.querySelectorAll(".h,.it,.btn,.col p,.num,.kick")) if (el.scrollWidth > el.clientWidth + 1) return true;
-  const h = q(".h"), body = q(".body"), illus = q(".illus");
+  const h = q(".h"), body = q(".body"), illus = q(".illus") || q(".photo");
   if (h && y(h, "bottom") > 1290) return true;
-  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") || q(".illus") ? 750 : 1250)) return true;
+  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") || q(".illus") || q(".photo") ? 750 : 1250)) return true;
   if (layout === "statement") {
     const bb = q(".bodybox");
     if (h && y(h, "bottom") > y(bb, "top") - gap) return true;
@@ -108,7 +110,7 @@ function openEditor(i) {
   editing = i;
   const c = cards[i];
   $("editTitle").textContent = `${i + 1}번 카드 · ${c.layout}`;
-  $("fields").innerHTML = `<label class="chk"><input type="checkbox" data-k="char" ${showChar(c) ? "checked" : ""}> 이 카드에 캐릭터 넣기</label>` + FIELDS.filter(([k]) => k in c || k === "title" || k === "illus")
+  $("fields").innerHTML = `<div class="photo-row"><span>사진</span><img id="photoPrev" alt="" ${c.photo ? `src="${c.photo}"` : "hidden"}><input type="file" id="photoIn" accept="image/*"><button type="button" id="photoDel" ${c.photo ? "" : "hidden"}>사진 지우기</button></div><label class="chk"><input type="checkbox" data-k="char" ${showChar(c) ? "checked" : ""}> 이 카드에 캐릭터 넣기</label>` + FIELDS.filter(([k]) => k in c || k === "title" || k === "illus")
     .map(([k, label]) => {
       const v = Array.isArray(c[k]) ? c[k].join(k === "illus" ? "" : "\n") : c[k] ?? "";
       return `<label>${label}<textarea data-k="${k}" rows="${k === "title" || k === "body" || k === "items" ? 3 : 1}">${esc(v)}</textarea></label>`;
@@ -116,14 +118,46 @@ function openEditor(i) {
   $("editor").showModal();
 }
 
+function refreshCard(i) {
+  const th = document.querySelector(`.thumb[data-i="${i}"]`);
+  th.querySelector(".card").outerHTML = cardHTML(cards[i], i);
+  fit(th.querySelector(".card"));
+}
+
+// 사진은 긴 변 1200px로 줄여서 JPEG로 보관 (용량·저장 속도)
+function resizePhoto(file) {
+  return new Promise((ok, fail) => {
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const k = Math.min(1, 1200 / Math.max(img.width, img.height));
+      const cv = document.createElement("canvas");
+      cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k);
+      const g = cv.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(img, 0, 0, cv.width, cv.height);
+      URL.revokeObjectURL(url); ok(cv.toDataURL("image/jpeg", 0.88));
+    };
+    img.onerror = () => fail(new Error("이미지를 열 수 없어요."));
+    img.src = url;
+  });
+}
+function setPhoto(data) {
+  if (data) cards[editing].photo = data; else delete cards[editing].photo;
+  $("photoPrev").hidden = !data; if (data) $("photoPrev").src = data;
+  $("photoDel").hidden = !data;
+  refreshCard(editing);
+}
+$("fields").addEventListener("change", async (e) => {
+  if (e.target.id !== "photoIn" || !e.target.files[0]) return;
+  try { setPhoto(await resizePhoto(e.target.files[0])); } catch (err) { say(err.message); }
+  e.target.value = "";
+});
+$("fields").addEventListener("click", (e) => { if (e.target.id === "photoDel") setPhoto(null); });
+
 $("fields").addEventListener("input", (e) => {
   const k = e.target.dataset.k;
   if (!k || editing < 0) return;
   if (k === "char") cards[editing].char = e.target.checked;
   else cards[editing][k] = k === "items" ? e.target.value.split("\n").filter(Boolean) : k === "illus" ? [...new Intl.Segmenter().segment(e.target.value.replace(/\s/g, ""))].map((x) => x.segment).slice(0, 2) : e.target.value;
-  const th = document.querySelector(`.thumb[data-i="${editing}"]`);
-  th.querySelector(".card").outerHTML = cardHTML(cards[editing], editing);
-  fit(th.querySelector(".card"));
+  refreshCard(editing);
 });
 
 $("useChar").addEventListener("change", () => {
