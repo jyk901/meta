@@ -91,3 +91,4 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .cta .body{position:absolute;left:80px;right:310px;bottom:90px;text-align:left;font-size:54px;font-weight:900}
 .cta .emoji{font-size:260px;right:70px;bottom:50px}
 .card.statement .brand{color:#fff}
+.emoji img{height:1em;width:auto;display:block}

@@ -1,6 +1,7 @@
 const $ = (id) => document.getElementById(id);
 let cards = [];
 let meta = { brand: "", theme: "sky" };
+let chars = []; // 업로드한 캐릭터 이미지(dataURL)
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 // **강조** → <b>, 줄바꿈 유지
@@ -22,7 +23,7 @@ const DEMO = [
 function cardHTML(c, i) {
   const pg = `<div class="brand"><i></i>${esc(meta.brand)}</div><div class="pg">${i + 1}/${cards.length}</div>`;
   const kick = c.kicker ? `<div class="kick">${fmt(c.kicker)}</div>` : "";
-  const emoji = c.emoji ? `<div class="emoji">${esc(c.emoji)}</div>` : "";
+  const emoji = chars.length ? `<div class="emoji"><img src="${chars[i % chars.length]}"></div>` : c.emoji ? `<div class="emoji">${esc(c.emoji)}</div>` : "";
   const body = c.body ? `<div class="body">${fmt(c.body)}</div>` : "";
   const items = (a) => (a || []).map((t) => `<div class="it">${fmt(t)}</div>`).join("");
   let inner;
@@ -102,6 +103,13 @@ $("dlAll").onclick = async (e) => {
   e.target.textContent = "전체 PNG 저장";
   e.target.disabled = false;
 };
+
+$("chars").addEventListener("change", async (e) => {
+  chars = await Promise.all([...e.target.files].map((f) => new Promise((ok) => {
+    const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(f);
+  })));
+  if (cards.length) render();
+});
 
 function say(text) { $("msg").textContent = text; $("msg").hidden = !text; }
 
