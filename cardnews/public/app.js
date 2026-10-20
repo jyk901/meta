@@ -63,7 +63,7 @@ function overflows(card) {
   for (const el of card.querySelectorAll(".h,.it,.btn,.col p,.num,.kick")) if (el.scrollWidth > el.clientWidth + 1) return true;
   const h = q(".h"), body = q(".body"), box = q(".box") || q(".cols") || q(".btns");
   if (h && y(h, "bottom") > 1290) return true;
-  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") ? 800 : 1250)) return true;
+  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") ? 750 : 1250)) return true;
   if (layout === "statement") {
     const bb = q(".bodybox");
     if (h && y(h, "bottom") > y(bb, "top") - gap) return true;
