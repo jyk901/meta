@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>카드뉴스 메이커</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>카드뉴스 메이커</h1>
+  <p>주제만 입력하면 10장짜리 카드뉴스를 만들어드려요</p>
+</header>
+
+<form id="form" class="panel">
+  <label class="wide">주제
+    <input id="topic" required placeholder="예) AI가 알려준 답, 정말 맞을까? 꼭 체크해야 할 AI 활용법">
+  </label>
+  <label>브랜드명 <input id="brand" value="My Brand"></label>
+  <label>대상 독자 <input id="audience" placeholder="예) 취업 준비생"></label>
+  <label>말투
+    <select id="tone">
+      <option>친근하고 명확한 존댓말</option>
+      <option>전문적이고 신뢰감 있는 말투</option>
+      <option>재치 있고 가벼운 말투</option>
+    </select>
+  </label>
+  <label>색상 테마
+    <select id="theme">
+      <option value="sky">스카이 블루</option>
+      <option value="mint">민트</option>
+      <option value="peach">피치</option>
+      <option value="violet">바이올렛</option>
+    </select>
+  </label>
+  <button id="go" type="submit">카드뉴스 만들기</button>
+</form>
+
+<div id="msg" class="msg" hidden></div>
+
+<section id="result" hidden>
+  <div class="bar">
+    <strong id="count"></strong>
+    <span class="hint">카드를 클릭하면 문구를 수정할 수 있어요 · **강조**</span>
+    <button id="dlAll" type="button">전체 PNG 저장</button>
+  </div>
+  <div id="grid" class="grid"></div>
+</section>
+
+<dialog id="editor">
+  <form method="dialog" id="editForm">
+    <h3 id="editTitle"></h3>
+    <div id="fields"></div>
+    <div class="row">
+      <button value="download" id="dlOne" type="button">이 카드 PNG 저장</button>
+      <button value="close">닫기</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
