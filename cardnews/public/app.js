@@ -20,11 +20,15 @@ const DEMO = [
   { layout: "cta", kicker: "AI를 쓰는 사람에서", title: "AI를 **활용하는** 사람으로!", items: ["저장해두기", "친구에게 공유"], illus: ["🚀", "🙌"] },
 ];
 
+// 캐릭터를 넣을지: 카드별 설정(c.char)이 있으면 그것, 없으면 전체 설정을 따름
+const showChar = (c) => chars.length > 0 && (c.char ?? $("useChar").value === "on");
+
 function cardHTML(c, i) {
+  const on = showChar(c);
   const pg = `<div class="brand"><i></i>${esc(meta.brand)}</div><div class="pg">${i + 1}/${cards.length}</div>`;
   const kick = c.kicker ? `<div class="kick">${fmt(c.kicker)}</div>` : "";
-  const person = chars.length ? `<div class="emoji"><img src="${chars[i % chars.length]}"></div>` : "";
-  const mascot = chars.length ? `<div class="emoji mascot"><img src="${chars[i % chars.length]}"></div>` : "";
+  const person = on ? `<div class="emoji"><img src="${chars[i % chars.length]}"></div>` : "";
+  const mascot = on ? `<div class="emoji mascot"><img src="${chars[i % chars.length]}"></div>` : "";
   const list = (Array.isArray(c.illus) ? c.illus : c.illus ? [c.illus] : c.emoji ? [c.emoji] : []).slice(0, 2);
   const illus = list.length ? `<div class="illus">${list.map((e) => `<span>${esc(e)}</span>`).join("")}</div>` : "";
   const body = c.body ? `<div class="body">${fmt(c.body)}</div>` : "";
@@ -47,7 +51,7 @@ function cardHTML(c, i) {
       c = { ...c, layout: "statement" };
       inner = `${kick}<div class="h">${fmt(c.title)}</div>${person}<div class="bodybox">${illus}${body}</div>`;
   }
-  return `<div class="card ${c.layout} ${meta.theme}${chars.length ? " hasm" : ""}" data-i="${i}">${pg}${inner}</div>`;
+  return `<div class="card ${c.layout} ${meta.theme}${on ? " hasm" : " nochar"}" data-i="${i}">${pg}${inner}</div>`;
 }
 
 
@@ -64,7 +68,7 @@ function overflows(card) {
   for (const el of card.querySelectorAll(".h,.it,.btn,.col p,.num,.kick")) if (el.scrollWidth > el.clientWidth + 1) return true;
   const h = q(".h"), body = q(".body"), illus = q(".illus");
   if (h && y(h, "bottom") > 1290) return true;
-  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") ? 750 : 1250)) return true;
+  if (layout === "cover" && q(".kick") && y(q(".kick"), "bottom") > (q(".emoji") || q(".illus") ? 750 : 1250)) return true;
   if (layout === "statement") {
     const bb = q(".bodybox");
     if (h && y(h, "bottom") > y(bb, "top") - gap) return true;
@@ -104,7 +108,7 @@ function openEditor(i) {
   editing = i;
   const c = cards[i];
   $("editTitle").textContent = `${i + 1}번 카드 · ${c.layout}`;
-  $("fields").innerHTML = FIELDS.filter(([k]) => k in c || k === "title" || k === "illus")
+  $("fields").innerHTML = `<label class="chk"><input type="checkbox" data-k="char" ${showChar(c) ? "checked" : ""}> 이 카드에 캐릭터 넣기</label>` + FIELDS.filter(([k]) => k in c || k === "title" || k === "illus")
     .map(([k, label]) => {
       const v = Array.isArray(c[k]) ? c[k].join(k === "illus" ? "" : "\n") : c[k] ?? "";
       return `<label>${label}<textarea data-k="${k}" rows="${k === "title" || k === "body" || k === "items" ? 3 : 1}">${esc(v)}</textarea></label>`;
@@ -115,10 +119,16 @@ function openEditor(i) {
 $("fields").addEventListener("input", (e) => {
   const k = e.target.dataset.k;
   if (!k || editing < 0) return;
-  cards[editing][k] = k === "items" ? e.target.value.split("\n").filter(Boolean) : k === "illus" ? [...new Intl.Segmenter().segment(e.target.value.replace(/\s/g, ""))].map((x) => x.segment).slice(0, 2) : e.target.value;
+  if (k === "char") cards[editing].char = e.target.checked;
+  else cards[editing][k] = k === "items" ? e.target.value.split("\n").filter(Boolean) : k === "illus" ? [...new Intl.Segmenter().segment(e.target.value.replace(/\s/g, ""))].map((x) => x.segment).slice(0, 2) : e.target.value;
   const th = document.querySelector(`.thumb[data-i="${editing}"]`);
   th.querySelector(".card").outerHTML = cardHTML(cards[editing], editing);
   fit(th.querySelector(".card"));
+});
+
+$("useChar").addEventListener("change", () => {
+  cards.forEach((c) => delete c.char);
+  if (cards.length) render();
 });
 
 $("grid").addEventListener("click", (e) => {

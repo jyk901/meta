@@ -35,7 +35,10 @@
       <option value="violet">바이올렛</option>
     </select>
   </label>
-  <label class="wide">캐릭터 이미지 (기본 캐릭터 사용 중 · 올리면 교체, 여러 장이면 번갈아 사용)
+  <label>캐릭터
+    <select id="useChar"><option value="on">넣기</option><option value="off">넣지 않기</option></select>
+  </label>
+  <label class="w3">캐릭터 이미지 (기본 캐릭터 사용 중 · 올리면 교체, 여러 장이면 번갈아 사용)
     <input id="chars" type="file" accept="image/*" multiple>
   </label>
   <button id="go" type="submit">카드뉴스 만들기</button>

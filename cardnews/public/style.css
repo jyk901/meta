@@ -7,6 +7,7 @@ body{margin:0;font-family:"Noto Sans KR",sans-serif;background:var(--bg);color:v
 .panel{max-width:960px;margin:20px auto;padding:20px;background:#fff;border:1px solid var(--line);border-radius:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:end}
 .panel label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#475068}
 .panel .wide{grid-column:1/-1}
+.panel .w3{grid-column:span 3}
 input,select,textarea{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
 button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;background:var(--blue);color:#fff;cursor:pointer}
 button:disabled{opacity:.5;cursor:wait}
@@ -23,7 +24,7 @@ dialog h3{margin:0 0 12px}
 dialog label{display:block;margin-bottom:10px;font-size:12px;font-weight:700;color:#475068}
 dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .row{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
-@media(max-width:760px){.panel{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.panel{grid-template-columns:1fr 1fr}.panel .w3{grid-column:1/-1}}
 
 /* ───── 카드 본체: 1080 x 1350 ───── */
 .card{--dk:#0a2a9e;--a:#2f6bff;--a2:#5ec8ff;--soft:#e6f6ff;--bgA:#4fb0ff;--bgB:#e9f9e9;--cream:#fffbd0;
@@ -122,3 +123,12 @@ dialog textarea{margin-top:4px;min-height:44px;resize:vertical}
 .cta .h{font-size:120px}
 .cta .btns{margin-top:46px;gap:26px}
 .cta .btn{font-size:54px;padding:26px 54px}
+
+dialog label.chk{display:flex;align-items:center;gap:8px;font-size:14px;color:inherit;margin-bottom:14px}
+dialog label.chk input{width:auto}
+/* 캐릭터 없는 카드: 그림을 더 크게, 글은 넓게 */
+.nochar.cover .illus span:nth-child(1){left:110px;bottom:170px;font-size:360px}
+.nochar.cover .illus span:nth-child(2){right:90px;bottom:300px;font-size:290px}
+.nochar.statement .h{width:auto}
+.nochar.statement .kick{max-width:none}
+.nochar.list .illus,.nochar.compare .illus,.nochar.stat .illus,.nochar.cta .illus{left:0;right:0;justify-content:center;font-size:270px;gap:20px}
