@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시험 직전 암기 요약본</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1d2330;--muted:#667085;--line:#e3e6ec;--accent:#3b5bdb;--hl:#fff3bf;--code:#eef0f4}
+@media (prefers-color-scheme:dark){:root{--bg:#14161b;--card:#1d2027;--text:#e8eaf0;--muted:#98a1b3;--line:#2c313b;--accent:#8ea2ff;--hl:#4a4217;--code:#2a2f3a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 -apple-system,"Segoe UI","Noto Sans KR","Malgun Gothic",sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:18px 14px 50px}
+h1{font-size:21px;margin:4px 0} .sub{color:var(--muted);font-size:13px;margin-bottom:12px}
+.top{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+button{font:inherit;font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+.box{background:var(--card);border:2px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.box h3{margin:0 0 6px;font-size:15px;color:var(--accent)}
+.g{display:inline-block;margin:2px 10px 2px 0;font-size:14px} .g b{background:var(--hl);padding:1px 7px;border-radius:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.flow{font:600 14px/1.6 ui-monospace,Menlo,Consolas,monospace;margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;break-inside:avoid}
+.card h2{margin:0 0 6px;font-size:16px;color:var(--accent)}
+table{width:100%;border-collapse:collapse}
+td{padding:5px 4px;border-top:1px solid var(--line);vertical-align:top;font-size:14px}
+td.n{width:24px;color:var(--muted);font-size:12px} td.q{color:var(--muted)}
+td.a{width:46%;font-weight:700}
+.ans{background:var(--hl);padding:1px 6px;border-radius:5px}
+.hide .ans{color:transparent;background:var(--line);cursor:pointer;user-select:none;border-radius:5px}
+.hide .ans.show{color:inherit;background:var(--hl)}
+.tip{margin:8px 0 0;font-size:13px;background:var(--code);padding:6px 9px;border-radius:8px}
+code{background:var(--code);padding:0 5px;border-radius:4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+@media print{
+  :root{--bg:#fff;--card:#fff;--text:#000;--muted:#444;--line:#bbb;--accent:#1c3faa;--hl:#fff3bf;--code:#eee}
+  .top{display:none} body{font-size:11px} .wrap{padding:0;max-width:none} td{padding:3px 3px;font-size:11px}
+  .hide .ans{color:inherit !important;background:var(--hl) !important}
+  .grid{gap:8px} .card{padding:8px 10px} .box{padding:8px 10px;margin-bottom:8px}
+}
+@page{size:A4;margin:10mm}
+</style></head><body>
+<div class="wrap">
+  <h1>📌 시험 직전 암기 요약본 (36문제)</h1>
+  <div class="sub">코디세이 "컴퓨터에게 명령 내리는 말(파이썬) 처음 배우기" · 노란색이 정답</div>
+  <div class="top"><button id="t">정답 가리기 (셀프 테스트)</button><button onclick="window.print()">인쇄 / PDF 저장</button></div>
+  <div class="box"><h3>Git 명령어 7종</h3><div><span class="g"><b>init</b> 저장소 시작</span><span class="g"><b>add</b> 스테이징에 올림</span><span class="g"><b>commit</b> 로컬에 기록</span><span class="g"><b>push</b> 원격에 올림</span><span class="g"><b>pull</b> 원격 변경 가져옴</span><span class="g"><b>checkout</b> 브랜치 이동/생성(-b)</span><span class="g"><b>clone</b> 원격 저장소 복제</span></div>
+    <div class="flow">작업폴더 →add→ 스테이징 →commit→ 로컬저장소 →push→ GitHub →pull/clone→ 내 컴퓨터</div></div>
+  <div class="grid"><section class="card"><h2>Python 기초</h2><table><tr><td class="n">1</td><td class="q">input()이 돌려주는 자료형</td><td class="a"><span class="ans">str (문자열)</span></td></tr><tr><td class="n">2</td><td class="q">키-값 쌍으로 저장하는 자료형</td><td class="a"><span class="ans">dict</span></td></tr><tr><td class="n">3</td><td class="q">함수가 결과를 돌려주는 키워드</td><td class="a"><span class="ans">return</span></td></tr><tr><td class="n">4</td><td class="q">① 횟수 정해짐·목록 순회 ② 조건이 참인 동안 반복</td><td class="a"><span class="ans">① for ② while</span></td></tr><tr><td class="n">5</td><td class="q">① if 다음 추가 조건 ② 모두 거짓일 때</td><td class="a"><span class="ans">① elif ② else</span></td></tr><tr><td class="n">6</td><td class="q">참/거짓 · 순서 있는 목록 · 정수</td><td class="a"><span class="ans">bool · list · int</span></td></tr></table><p class="tip">💡 input()은 항상 <b>str</b> → 숫자는 <code>int()</code>로 변환 → 실패하면 <b>ValueError</b>. 자료형 5종: int·str·bool·list·dict</p></section><section class="card"><h2>클래스·객체</h2><table><tr><td class="n">7</td><td class="q">객체 생성 시 자동 호출되는 메서드</td><td class="a"><span class="ans">__init__ (생성자)</span></td></tr><tr><td class="n">8</td><td class="q">객체 자기 자신을 가리키는 이름</td><td class="a"><span class="ans">self</span></td></tr><tr><td class="n">9</td><td class="q">① 객체가 가진 데이터 ② 객체의 행동(함수)</td><td class="a"><span class="ans">① 속성(attribute) ② 메서드(method)</span></td></tr><tr><td class="n">10</td><td class="q">① 설계도 ② 설계도로 만든 실물</td><td class="a"><span class="ans">① 클래스 ② 객체(인스턴스)</span></td></tr><tr><td class="n">11</td><td class="q">클래스를 정의하는 키워드</td><td class="a"><span class="ans">class</span></td></tr><tr><td class="n">12</td><td class="q">q의 choices 속성을 읽는 코드</td><td class="a"><span class="ans">q.choices</span></td></tr></table><p class="tip">💡 <b>클래스=붕어빵 틀(설계도)</b>, <b>객체=붕어빵</b>. 점(.)은 "~의": <code>q.choices</code> = q의 선택지</p></section><section class="card"><h2>파일·JSON·예외</h2><table><tr><td class="n">13</td><td class="q">종료 후에도 퀴즈·점수가 유지되는 성질</td><td class="a"><span class="ans">데이터 영속성</span></td></tr><tr><td class="n">14</td><td class="q">오류가 나도 멈추지 않게 처리하는 구문</td><td class="a"><span class="ans">try / except</span></td></tr><tr><td class="n">15</td><td class="q">int(&quot;abc&quot;) 때 발생하는 예외</td><td class="a"><span class="ans">ValueError</span></td></tr><tr><td class="n">16</td><td class="q">파일을 여는 내장 함수</td><td class="a"><span class="ans">open  (with open(...) as f)</span></td></tr><tr><td class="n">17</td><td class="q">① 파일에 JSON 저장 ② 파일에서 JSON 읽기</td><td class="a"><span class="ans">① json.dump ② json.load</span></td></tr><tr><td class="n">18</td><td class="q">Ctrl+C를 눌렀을 때 예외 (입력 종료는?)</td><td class="a"><span class="ans">KeyboardInterrupt (EOFError)</span></td></tr></table><p class="tip">💡 프로그램을 꺼도 데이터가 남는 것 = <b>데이터 영속성</b>. 파일이 없거나 깨져도 안 멈추게 = <b>try/except</b></p></section><section class="card"><h2>Git ① 기록 흐름</h2><table><tr><td class="n">19</td><td class="q">변경 파일을 스테이징에 올리는 명령</td><td class="a"><span class="ans">git add</span></td></tr><tr><td class="n">20</td><td class="q">스테이징한 변경을 로컬에 기록</td><td class="a"><span class="ans">git commit</span></td></tr><tr><td class="n">21</td><td class="q">로컬 커밋을 원격(GitHub)에 올림</td><td class="a"><span class="ans">git push</span></td></tr><tr><td class="n">22</td><td class="q">현재 폴더를 새 Git 저장소로 시작</td><td class="a"><span class="ans">git init</span></td></tr><tr><td class="n">23</td><td class="q">추적하지 않을 파일을 적는 파일</td><td class="a"><span class="ans">.gitignore</span></td></tr><tr><td class="n">24</td><td class="q">커밋 접두어 ① 새 기능 ② 오류 수정 ③ 문서</td><td class="a"><span class="ans">① Feat ② Fix ③ Docs  (Refactor=구조 정리)</span></td></tr></table><p class="tip">💡 흐름: 작업 폴더 → <b>add</b>(스테이징) → <b>commit</b>(로컬 기록) → <b>push</b>(원격 업로드)</p></section><section class="card"><h2>Git ② 브랜치·원격</h2><table><tr><td class="n">25</td><td class="q">브랜치 이동 (-b 붙이면 생성+이동)</td><td class="a"><span class="ans">git checkout</span></td></tr><tr><td class="n">26</td><td class="q">작업 브랜치를 합치는 명령</td><td class="a"><span class="ans">git merge</span></td></tr><tr><td class="n">27</td><td class="q">① 원격을 처음 복제 ② 변경사항 가져오기</td><td class="a"><span class="ans">① git clone ② git pull</span></td></tr><tr><td class="n">28</td><td class="q">브랜치 목록 보기</td><td class="a"><span class="ans">git branch</span></td></tr><tr><td class="n">29</td><td class="q">복제 실습: ① 올리기 ② 원래 폴더에서 가져오기</td><td class="a"><span class="ans">① git push ② git pull</span></td></tr><tr><td class="n">30</td><td class="q">merge 실행 전 이동해야 하는 브랜치</td><td class="a"><span class="ans">main (받는 쪽)</span></td></tr></table><p class="tip">💡 <b>clone</b>=처음 복제 1회, <b>pull</b>=변경 가져오기. 병합은 <b>받는 쪽(main)</b>으로 이동해서 <code>merge</code></p></section><section class="card"><h2>과제 규칙</h2><table><tr><td class="n">31</td><td class="q">Quiz 클래스 속성 3가지</td><td class="a"><span class="ans">question, choices, answer</span></td></tr><tr><td class="n">32</td><td class="q">데이터 저장 파일 (루트, 인코딩)</td><td class="a"><span class="ans">state.json (UTF-8)</span></td></tr><tr><td class="n">33</td><td class="q">이력을 그래프로 보는 명령 (제출 스크린샷)</td><td class="a"><span class="ans">git log --oneline --graph</span></td></tr><tr><td class="n">34</td><td class="q">최소 커밋 개수</td><td class="a"><span class="ans">10개 이상</span></td></tr><tr><td class="n">35</td><td class="q">Python 최소 버전 (외부 라이브러리 X)</td><td class="a"><span class="ans">3.10 이상</span></td></tr><tr><td class="n">36</td><td class="q">게임 전체를 관리하는 클래스</td><td class="a"><span class="ans">QuizGame  (개별 퀴즈=Quiz)</span></td></tr></table><p class="tip">💡 숫자 암기: 퀴즈 <b>5개</b> 이상 · 선택지 <b>4개</b> · 정답 <b>1~4</b> · 클래스 <b>2개</b> 이상 · 커밋 <b>10개</b> 이상 · Python <b>3.10</b></p></section></div>
+</div>
+<script>
+const b=document.getElementById('t'), w=document.body;
+b.onclick=()=>{const h=w.classList.toggle('hide'); b.textContent=h?'정답 보이기':'정답 가리기 (셀프 테스트)'; document.querySelectorAll('.ans.show').forEach(e=>e.classList.remove('show'));};
+document.querySelectorAll('.ans').forEach(a=>a.addEventListener('click',()=>{if(w.classList.contains('hide'))a.classList.toggle('show');}));
+</script></body></html>
