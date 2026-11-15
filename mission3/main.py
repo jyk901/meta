@@ -208,6 +208,7 @@ def run_json_mode(path=DEFAULT_JSON):
         print("판정: %s | expected: %s | %s%s" % (result, expected, "PASS" if ok else "FAIL", note))
 
     print_perf_table([3, 5, 13, 25], filters, patterns)
+    print_optimization_table()
 
     print("\n" + LINE + "\n# [4] 결과 요약\n" + LINE)
     print("총 테스트: %d개\n통과: %d개\n실패: %d개" % (total, passed, len(failures)))
@@ -229,6 +230,20 @@ def print_perf_table(sizes, filters=None, patterns=None):
             flt = filters[n][LABEL_CROSS]
         ms, _ = measure_ms(mac, pat, flt)
         print("%-8s%-16.3f%d" % ("%dx%d" % (n, n), ms, n * n))
+
+
+def print_optimization_table(sizes=(3, 5, 13, 25), repeat=200):
+    """[보너스] 2차원 vs 1차원 MAC: 동일 입력, 동일 반복 횟수로 비교 (변환 비용 제외)."""
+    print("\n" + LINE + "\n# [보너스] 최적화 전/후 비교 (2D vs 1D, %d회 평균)\n" % repeat + LINE)
+    print("%-8s%-14s%-14s%s" % ("크기", "2D(ms)", "1D(ms)", "속도 향상"))
+    print("-" * 46)
+    for n in sizes:
+        p, f = make_x(n), make_cross(n)
+        pf, ff = flatten(p), flatten(f)
+        t2, r2 = measure_ms(mac, p, f, repeat=repeat)
+        t1, r1 = measure_ms(mac_flat, pf, ff, repeat=repeat)
+        assert abs(r1 - r2) < EPSILON        # 두 방식의 결과 동일성 검증
+        print("%-8s%-14.4f%-14.4f%.2fx" % ("%dx%d" % (n, n), t2, t1, t2 / t1))
 
 
 # ---------------------------------------------------------------- 진입점
