@@ -20,5 +20,12 @@ for n in (5, 13, 25):
             data["patterns"]["size_%d_%d" % (n, idx)] = {
                 "input": noisy(mk(n), noise), "expected": lab if idx % 2 else ("Cross" if lab == "+" else "x")}
             idx += 1
+# 동점 케이스: Cross 전용 픽셀(0.1+0.2)과 X 전용 픽셀(0.3)만 켜면 두 점수가
+# 부동소수점 오차(약 4e-17)만큼만 달라 epsilon 정책에서 UNDECIDED -> expected와 달라 FAIL
+tie = [[0] * 13 for _ in range(13)]
+tie[6][0] = 0.1 + 0.2
+tie[0][0] = 0.3
+data["patterns"]["size_13_5"] = {"input": tie, "expected": "x"}
+
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(data, f)
