@@ -1,0 +1,47 @@
+{
+  "id": "EP001",
+  "topic_id": "T01",
+  "topic": {
+    "philosopher": "에픽테토스",
+    "concept": "통제의 이분법",
+    "hook_situation": "남의 평가가 신경 쓰일 때",
+    "source_hint": "엥케이리디온 1장"
+  },
+  "status": "researched",
+  "created_at": "2026-11-24T22:05:07+09:00",
+  "slot": null,
+  "stages": {
+    "research": {
+      "done": true,
+      "at": "2026-11-24T22:08:16+09:00",
+      "artifact": "brief.md"
+    },
+    "script": {
+      "done": false
+    },
+    "review": {
+      "done": false
+    },
+    "human_a": {
+      "done": false
+    },
+    "storyboard": {
+      "done": false
+    },
+    "assets": {
+      "done": false
+    },
+    "render": {
+      "done": false
+    },
+    "human_b": {
+      "done": false
+    },
+    "publish": {
+      "done": false
+    },
+    "analytics": {
+      "done": false
+    }
+  }
+}

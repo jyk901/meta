@@ -1,0 +1,47 @@
+{
+  "id": "EP002",
+  "topic_id": "T02",
+  "topic": {
+    "philosopher": "세네카",
+    "concept": "시간의 짧음",
+    "hook_situation": "바빠 죽겠는데 뭘 했는지 모를 때",
+    "source_hint": "De Brevitate Vitae(인생의 짧음에 관하여) 1~3장"
+  },
+  "status": "researched",
+  "created_at": "2026-11-24T22:05:07+09:00",
+  "slot": null,
+  "stages": {
+    "research": {
+      "done": true,
+      "at": "2026-11-24T22:08:25+09:00",
+      "artifact": "brief.md"
+    },
+    "script": {
+      "done": false
+    },
+    "review": {
+      "done": false
+    },
+    "human_a": {
+      "done": false
+    },
+    "storyboard": {
+      "done": false
+    },
+    "assets": {
+      "done": false
+    },
+    "render": {
+      "done": false
+    },
+    "human_b": {
+      "done": false
+    },
+    "publish": {
+      "done": false
+    },
+    "analytics": {
+      "done": false
+    }
+  }
+}

@@ -1,0 +1,214 @@
+topics:
+- id: T01
+  philosopher: 에픽테토스
+  concept: 통제의 이분법
+  hook_situation: 남의 평가가 신경 쓰일 때
+  source_hint: 엥케이리디온 1장
+  status: in_progress
+  weight: 10
+  episode: EP001
+- id: T02
+  philosopher: 세네카
+  concept: 시간의 짧음
+  hook_situation: 바빠 죽겠는데 뭘 했는지 모를 때
+  source_hint: De Brevitate Vitae(인생의 짧음에 관하여) 1~3장
+  status: in_progress
+  weight: 10
+  episode: EP002
+- id: T03
+  philosopher: 니체
+  concept: 영원회귀
+  hook_situation: 똑같은 하루가 반복될 때
+  source_hint: 즐거운 학문 341절
+  status: in_progress
+  weight: 9
+  episode: EP003
+- id: T04
+  philosopher: 사르트르
+  concept: 실존은 본질에 앞선다
+  hook_situation: '"나는 원래 이런 사람"이라고 핑계댈 때'
+  source_hint: 실존주의는 휴머니즘이다
+  status: queued
+  weight: 9
+- id: T05
+  philosopher: 소크라테스
+  concept: 무지의 지
+  hook_situation: 아는 척하다 들통날 때
+  source_hint: 플라톤 소크라테스의 변론 21d
+  status: queued
+  weight: 8
+- id: T06
+  philosopher: 쇼펜하우어
+  concept: 고슴도치 딜레마
+  hook_situation: 사람이 가까워지면 불편할 때
+  source_hint: 소품과 부록 2권 31장 396절
+  status: queued
+  weight: 8
+- id: T07
+  philosopher: 카뮈
+  concept: 시지프 신화
+  hook_situation: 의미 없는 일을 반복할 때
+  source_hint: 시지프 신화 마지막 장
+  status: queued
+  weight: 8
+- id: T08
+  philosopher: 장자
+  concept: 호접몽
+  hook_situation: 꿈처럼 현실감이 없을 때
+  source_hint: 장자 제물론 끝부분
+  status: queued
+  weight: 7
+- id: T09
+  philosopher: 아리스토텔레스
+  concept: 중용
+  hook_situation: 극단으로 치달을 때
+  source_hint: 니코마코스 윤리학 2권 6장
+  status: queued
+  weight: 7
+- id: T10
+  philosopher: 마르쿠스 아우렐리우스
+  concept: 아침의 명상
+  hook_situation: 출근 전 사람이 싫을 때
+  source_hint: 명상록 2.1
+  status: queued
+  weight: 8
+- id: T11
+  philosopher: 에피쿠로스
+  concept: 쾌락의 계산
+  hook_situation: 소비 후 공허할 때
+  source_hint: 메노이케우스에게 보내는 편지
+  status: queued
+  weight: 7
+- id: T12
+  philosopher: 키르케고르
+  concept: 불안은 자유의 현기증
+  hook_situation: 선택지가 많아 불안할 때
+  source_hint: 불안의 개념 1부 5장
+  status: queued
+  weight: 7
+- id: T13
+  philosopher: 칸트
+  concept: 정언명령
+  hook_situation: '"나 하나쯤" 할 때'
+  source_hint: 윤리형이상학 정초 2장
+  status: queued
+  weight: 6
+- id: T14
+  philosopher: 파스칼
+  concept: 내기 논증
+  hook_situation: 확신 없이 결정해야 할 때
+  source_hint: 팡세 233(브룬슈빅 번호)
+  status: queued
+  weight: 6
+- id: T15
+  philosopher: 플라톤
+  concept: 동굴의 비유
+  hook_situation: 알고리즘이 보여주는 것만 볼 때
+  source_hint: 국가 7권 514a~
+  status: queued
+  weight: 7
+- id: T16
+  philosopher: 공자
+  concept: 서(恕)
+  hook_situation: 하기 싫은 걸 남에게 시킬 때
+  source_hint: 논어 위령공 23
+  status: queued
+  weight: 6
+- id: T17
+  philosopher: 노자
+  concept: 무위
+  hook_situation: 애쓸수록 꼬일 때
+  source_hint: 도덕경 37장, 48장
+  status: queued
+  weight: 6
+- id: T18
+  philosopher: 비트겐슈타인
+  concept: 언어의 한계
+  hook_situation: 말로 설명이 안 될 때
+  source_hint: 논리철학논고 5.6, 7
+  status: queued
+  weight: 5
+- id: T19
+  philosopher: 하이데거
+  concept: 죽음을 향한 존재
+  hook_situation: 미루기가 습관일 때
+  source_hint: 존재와 시간 2편 1장
+  status: queued
+  weight: 6
+- id: T20
+  philosopher: 데카르트
+  concept: 방법적 회의
+  hook_situation: 뭘 믿어야 할지 모를 때
+  source_hint: 성찰 1, 2
+  status: queued
+  weight: 5
+- id: T21
+  philosopher: 흄
+  concept: 귀납의 문제
+  hook_situation: '"지금까지 괜찮았으니"가 위험할 때'
+  source_hint: 인간 지성에 관한 탐구 4절
+  status: queued
+  weight: 5
+- id: T22
+  philosopher: 밀
+  concept: 해악 원칙
+  hook_situation: 남 일에 참견하고 싶을 때
+  source_hint: 자유론 1장
+  status: queued
+  weight: 5
+- id: T23
+  philosopher: 롤스
+  concept: 무지의 베일
+  hook_situation: 공정한 규칙을 정해야 할 때
+  source_hint: 정의론 24절
+  status: queued
+  weight: 5
+- id: T24
+  philosopher: 벤담·푸코
+  concept: 파놉티콘
+  hook_situation: 감시당하는 느낌이 들 때
+  source_hint: 감시와 처벌 3부 3장
+  status: queued
+  weight: 5
+- id: T25
+  philosopher: 한나 아렌트
+  concept: 악의 평범성
+  hook_situation: '"시키는 대로 했을 뿐"일 때'
+  source_hint: 예루살렘의 아이히만 에필로그
+  status: queued
+  weight: 6
+- id: T26
+  philosopher: 빅터 프랭클
+  concept: 의미에의 의지
+  hook_situation: 모든 게 무의미하게 느껴질 때
+  source_hint: 죽음의 수용소에서 2부
+  status: queued
+  weight: 7
+- id: T27
+  philosopher: 러셀
+  concept: 게으름에 대한 찬양
+  hook_situation: 쉬면 죄책감 들 때
+  source_hint: 게으름에 대한 찬양(1932) 서두
+  status: queued
+  weight: 6
+- id: T28
+  philosopher: 플루타르코스
+  concept: 테세우스의 배
+  hook_situation: '"예전의 내가 아니다" 싶을 때'
+  source_hint: 플루타르코스 영웅전 테세우스 23
+  status: queued
+  weight: 5
+- id: T29
+  philosopher: 필리파 풋
+  concept: 트롤리 딜레마
+  hook_situation: 둘 다 나쁜 선택지뿐일 때
+  source_hint: Foot 1967, 낙태 문제와 이중효과 원리
+  status: queued
+  weight: 5
+- id: T30
+  philosopher: 보드리야르
+  concept: 시뮬라크르
+  hook_situation: SNS 속 삶이 더 진짜 같을 때
+  source_hint: 시뮬라시옹 1장
+  status: queued
+  weight: 5
