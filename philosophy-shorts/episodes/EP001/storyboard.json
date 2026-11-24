@@ -1,0 +1,96 @@
+{
+  "id": "EP001",
+  "fps": 30,
+  "size": "1080x1920",
+  "cuts": [
+    {
+      "n": 1,
+      "start": 0,
+      "end": 3,
+      "section": 1,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, A lone silhouette seen from behind standing before a distant glowing amber window, empty dark space around",
+      "caption_emphasis": [
+        "2천 년"
+      ],
+      "motion": "zoom_in",
+      "hook_text": "2천 년 전의 답"
+    },
+    {
+      "n": 2,
+      "start": 3,
+      "end": 12,
+      "section": 2,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, A smartphone lying face-up on a dark desk, its screen glowing faint amber, empty dark surroundings",
+      "caption_emphasis": [
+        "추측"
+      ],
+      "motion": "pan_left"
+    },
+    {
+      "n": 3,
+      "start": 12,
+      "end": 21,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, A weathered stone bust of an ancient philosopher in profile, lit by a single amber candle, faceless and abstract",
+      "caption_emphasis": [
+        "에픽테토스"
+      ],
+      "motion": "zoom_out"
+    },
+    {
+      "n": 4,
+      "start": 21,
+      "end": 30,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, An open ancient scroll resting on a stone ledge, amber candlelight glowing across its blank surface",
+      "caption_emphasis": [
+        "달려 있고"
+      ],
+      "motion": "pan_right"
+    },
+    {
+      "n": 5,
+      "start": 30,
+      "end": 38,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, A single broken stone column standing alone, amber light behind it, a fine chain loosely hanging from its top",
+      "caption_emphasis": [
+        "남의 것"
+      ],
+      "motion": "zoom_in"
+    },
+    {
+      "n": 6,
+      "start": 38,
+      "end": 45,
+      "section": 4,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, An open notebook and a pen on a desk by a window, a thin vertical line dividing the page into two halves, amber lamp glow",
+      "caption_emphasis": [
+        "두 칸"
+      ],
+      "motion": "pan_left"
+    },
+    {
+      "n": 7,
+      "start": 45,
+      "end": 52,
+      "section": 4,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, A hand holding a pen over a notebook page, one half crossed out with a single line, amber window light",
+      "caption_emphasis": [
+        "줄"
+      ],
+      "motion": "zoom_out"
+    },
+    {
+      "n": 8,
+      "start": 52,
+      "end": 59,
+      "section": 5,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, A quiet window at night with a small amber lamp on the sill, empty space beyond the glass",
+      "caption_emphasis": [
+        "어느 칸"
+      ],
+      "motion": "pan_right"
+    }
+  ]
+}

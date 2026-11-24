@@ -1,0 +1,99 @@
+{
+  "id": "EP002",
+  "fps": 30,
+  "size": "1080x1920",
+  "cuts": [
+    {
+      "n": 1,
+      "start": 0,
+      "end": 3,
+      "section": 1,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A lone smartphone lying face-down on a bare desk, a faint amber glow leaking from its edges, empty dark space above",
+      "caption_emphasis": [
+        "바빠 죽겠는데"
+      ],
+      "motion": "zoom_in",
+      "hook_text": "오늘 뭘 했더라?"
+    },
+    {
+      "n": 2,
+      "start": 3,
+      "end": 12,
+      "section": 2,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A cluttered desk edge by a window at dusk, a single smartphone with a glowing amber screen, an empty chair beside it, large dark empty space above",
+      "caption_emphasis": [
+        "회의",
+        "잠깐만요"
+      ],
+      "motion": "pan_left"
+    },
+    {
+      "n": 3,
+      "start": 12,
+      "end": 20,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A weathered marble bust of an ancient Roman figure in silhouette, lit from one side by amber light, bare dark background",
+      "caption_emphasis": [
+        "세네카",
+        "짧게 만든다"
+      ],
+      "motion": "zoom_out"
+    },
+    {
+      "n": 4,
+      "start": 20,
+      "end": 29,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A single ancient parchment scroll partly unrolled on a stone surface, an amber candle flame beside it, dark empty background",
+      "caption_emphasis": [
+        "오쿠파티",
+        "바쁜 사람"
+      ],
+      "motion": "pan_right"
+    },
+    {
+      "n": 5,
+      "start": 29,
+      "end": 38,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A tall solitary stone column with an amber candle burning at its base, long soft shadow, dark empty background",
+      "caption_emphasis": [
+        "인생은 깁니다"
+      ],
+      "motion": "zoom_in"
+    },
+    {
+      "n": 6,
+      "start": 38,
+      "end": 45,
+      "section": 4,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. An open blank notebook with a pen resting on it on a bedside table, a small warm amber lamp, dark empty space above",
+      "caption_emphasis": [
+        "세 줄"
+      ],
+      "motion": "pan_left"
+    },
+    {
+      "n": 7,
+      "start": 45,
+      "end": 52,
+      "section": 4,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A small pile of coins beside an hourglass on a dark desk, amber light on the hourglass sand, empty background",
+      "caption_emphasis": [
+        "시간 쓴 내역"
+      ],
+      "motion": "zoom_out"
+    },
+    {
+      "n": 8,
+      "start": 52,
+      "end": 59,
+      "section": 5,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo. A window at night with a single amber light in the distance, a chair seen from behind facing the window, minimal empty room",
+      "caption_emphasis": [
+        "누구의 하루"
+      ],
+      "motion": "pan_right"
+    }
+  ]
+}

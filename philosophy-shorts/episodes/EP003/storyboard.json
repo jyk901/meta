@@ -1,0 +1,103 @@
+{
+  "id": "EP003",
+  "fps": 30,
+  "size": "1080x1920",
+  "cuts": [
+    {
+      "n": 1,
+      "start": 0,
+      "end": 3,
+      "section": 1,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a single bone-white hourglass glowing with amber light, sand looping endlessly, centered, empty dark background",
+      "caption_emphasis": [
+        "영원히"
+      ],
+      "motion": "zoom_in",
+      "hook_text": "오늘이 영원히 반복된다면"
+    },
+    {
+      "n": 2,
+      "start": 3,
+      "end": 12,
+      "section": 2,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a modern smartphone lying on a dark desk beside a window, faint amber glow from the screen, empty background",
+      "caption_emphasis": [
+        "지하철",
+        "영상 한 시간"
+      ],
+      "motion": "pan_left"
+    },
+    {
+      "n": 3,
+      "start": 12,
+      "end": 21,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a weathered marble stone bust silhouette in profile, lit by a single amber candle, no realistic face, empty background",
+      "caption_emphasis": [
+        "니체",
+        "악령"
+      ],
+      "motion": "zoom_out"
+    },
+    {
+      "n": 4,
+      "start": 21,
+      "end": 30,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, an old parchment scroll unrolled, partly illuminated by amber candlelight, empty dark background",
+      "caption_emphasis": [
+        "수없이 여러 번",
+        "똑같은 순서"
+      ],
+      "motion": "pan_right"
+    },
+    {
+      "n": 5,
+      "start": 30,
+      "end": 38,
+      "section": 3,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a bone-white stone column with an amber ring of light circling it endlessly, empty dark background",
+      "caption_emphasis": [
+        "영원회귀",
+        "무한 반복"
+      ],
+      "motion": "zoom_in"
+    },
+    {
+      "n": 6,
+      "start": 38,
+      "end": 45,
+      "section": 4,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a pair of worn walking shoes by a doorway with soft amber light from the window, empty dark background",
+      "caption_emphasis": [
+        "하나만",
+        "산책"
+      ],
+      "motion": "pan_left"
+    },
+    {
+      "n": 7,
+      "start": 45,
+      "end": 52,
+      "section": 4,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a modern bedside lamp casting a warm amber glow on a simple nightstand, empty dark background",
+      "caption_emphasis": [
+        "하나",
+        "떠올려"
+      ],
+      "motion": "zoom_out"
+    },
+    {
+      "n": 8,
+      "start": 52,
+      "end": 59,
+      "section": 5,
+      "prompt": "Minimalist dark cinematic illustration, deep charcoal background, single warm amber light source, soft film grain, muted palette (charcoal, bone white, amber), editorial quality, 9:16 vertical, no text, no letters, no watermark, no logo, a lone candle flame glowing in darkness, bone-white wax, amber light, empty dark background",
+      "caption_emphasis": [
+        "다시 한 번",
+        "1분 철학"
+      ],
+      "motion": "pan_right"
+    }
+  ]
+}

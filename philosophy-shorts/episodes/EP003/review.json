@@ -1,0 +1,19 @@
+{
+  "verdict": "pass",
+  "scores": {"hook": 4, "accuracy": 5, "single_idea": 5, "application": 4, "ending": 5, "total": 23},
+  "validator": {"ok": true, "chars": 309, "errors": [], "warnings": []},
+  "checked_claims": [
+    {"claim": "영원회귀 사고실험의 출처는 『즐거운 학문』(제4부 341절 「가장 무거운 짐」)", "verified": true, "how": "브리프 원전 근거 1 (확신도 높음, KSA 3 / Kaufmann 1974 / Common 1910 대조). 한국어판 절 제목 「가장 무거운 짐」은 책세상 니체전집 12로 확인"},
+    {"claim": "어느 밤, 악령이 찾아와 '이 삶을 수없이 여러 번 더 살아야 한다'고 말한다", "verified": true, "how": "브리프 원전 근거 1 — 독문 'eines Tages oder Nachts ein Dämon … noch einmal und noch unzählige Male leben müssen'. 대본은 '어느 날 혹은 어느 밤'을 '어느 밤'으로, '다시 한 번, 그리고 수없이'를 '수없이'로 압축했으나 뜻 왜곡 없음"},
+    {"claim": "작은 것 하나까지, 똑같은 순서로 되돌아온다", "verified": true, "how": "브리프 원전 근거 1 — 'alles unsäglich Kleine und Grosse … in der selben Reihe und Folge'"},
+    {"claim": "영원회귀는 (사실 주장이 아니라) '이 하루가 무한 반복된다면'이라는 질문이다", "verified": true, "how": "브리프 핵심 개념·오해 2 — 341절은 'Wie, wenn…' 가정법 사고실험. 대본이 '세상이 실제로 반복된다'고 단정하지 않고 '질문'으로 제시해 오해 2를 피함. 풀어쓰기도 브리프 용어 항목과 일치"},
+    {"claim": "니체: 이 생각이 지금의 우리를 바꾸거나 아니면 짓누를 것이다", "verified": true, "how": "브리프 원전 근거 4 — 'er würde dich, wie du bist, verwandeln und vielleicht zermalmen'. 원문의 조건절('이 생각이 너를 지배하게 된다면')은 생략됐으나 취지 유지"},
+    {"claim": "마무리 질문 '당신은 오늘을 다시 한 번, 수없이 여러 번 더 원하십니까?'", "verified": true, "how": "브리프 원전 근거 3 — 'Willst du dies noch einmal und noch unzählige Male?'. '이것(dies)'을 '오늘'로 바꿔 훅과 연결, 원뜻 유지"},
+    {"claim": "아모르 파티·윤회·'나를 죽이지 못하는 것' 등 두 번째 개념/오귀속 명언 미사용", "verified": true, "how": "대본 전문 대조 — 해당 표현 없음. One idea 준수"},
+    {"claim": "책세상판 341절 문장과의 자막 대조", "verified": false, "how": "웹 검색으로 책세상판 본문 확인 불가(검색 결과에 번역 원문 없음). 대본 인용은 독문·영문 기준으로 정확하므로 판정에는 영향 없음. 자막 제작 시 책세상판 대조는 스토리보드 단계로 이월"}
+  ],
+  "issues": [
+    {"section": 3, "type": "format", "detail": "따옴표 안 직접 인용 \"이 삶을 수없이 여러 번 더 살아야 한다\"는 원문 '다시 한 번, 그리고 수없이 여러 번 더'를 줄인 축약 인용이다. 나레이션으로는 문제없으나, 화면에 인용 자막으로 올릴 경우 축약문이 원문처럼 보일 수 있다.", "fix": "대본 수정 불필요. 스토리보드에서 인용 자막을 쓴다면 '다시 한 번, 그리고 수없이 여러 번 더 살아야 한다'(가능하면 책세상판 문장)로 표기하고, 나레이션은 현재 문장 유지."}
+  ],
+  "note": "인용·귀속 모두 브리프 원전 근거(확신도 높음)와 일치하고, 영원회귀를 사실 주장이 아닌 '질문'으로 제시해 가장 흔한 오해를 정확히 피했습니다. 3구간 마지막 문장('바꾸거나, 아니면 짓누를 거라고')이 이 편의 날이니 그대로 두십시오."
+}

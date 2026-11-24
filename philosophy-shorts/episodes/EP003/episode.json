@@ -7,7 +7,7 @@
     "hook_situation": "똑같은 하루가 반복될 때",
     "source_hint": "즐거운 학문 341절"
   },
-  "status": "scripted",
+  "status": "storyboarded",
   "created_at": "2026-11-24T22:05:07+09:00",
   "slot": null,
   "stages": {
@@ -22,13 +22,21 @@
       "artifact": "script.md"
     },
     "review": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:13:24+09:00",
+      "artifact": "review.json",
+      "verdict": "pass"
     },
     "human_a": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:23:11+09:00",
+      "by": "auto",
+      "note": "사용자 자율진행 지시"
     },
     "storyboard": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:23:30+09:00",
+      "artifact": "storyboard.json"
     },
     "assets": {
       "done": false

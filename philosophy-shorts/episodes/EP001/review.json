@@ -1,0 +1,17 @@
+{
+  "verdict": "pass",
+  "scores": {"hook": 5, "accuracy": 5, "single_idea": 5, "application": 5, "ending": 4, "total": 24},
+  "validator": {"ok": true, "chars": 317, "errors": [], "warnings": []},
+  "checked_claims": [
+    {"claim": "에픽테토스는 노예 출신", "verified": true, "how": "브리프에 없음 → 웹 검색. SEP 'Epictetus' Life and Works: 50년대 히에라폴리스 출생, 네로 궁정 관리 에파프로디토스의 노예였다가 해방"},
+    {"claim": "『엥케이리디온』은 '어떤 것은 우리에게 달려 있고, 어떤 것은 아니다'로 시작한다", "verified": true, "how": "브리프 원전 근거 1 (1장 1절, 그리스어 원문·Carter·Dickinson 대조, 확신도 높음). 1장이 책의 첫 장이므로 '이렇게 시작합니다'는 정확"},
+    {"claim": "판단·선택은 내게 달린 것, 재산·평판은 달리지 않은 것", "verified": true, "how": "브리프 1장 1절: 달린 것 = 판단(ὑπόληψις)·충동·욕구·회피, 달리지 않은 것 = 몸·재산·평판(δόξα)·관직. '선택'은 충동·욕구·회피를 묶은 쉬운 말로 왜곡 아님. 평판이 원전 목록에 명시돼 있어 훅과 직결"},
+    {"claim": "달린 것은 본래 자유롭고, 달리지 않은 것은 남의 것이다", "verified": true, "how": "브리프 원전 근거 2 (1장 2절, Carter: 'by nature free... alien', 확신도 높음)"},
+    {"claim": "남의 것을 내 것처럼 붙들기에 괴롭다 (1장 3절 의역)", "verified": true, "how": "브리프에서 확신도 '중간'이라 번역본 재확인 요청 → 웹 검색으로 Long 역(Wikisource) 'if you think... things in the power of others to be your own, you will be hindered, you will lament' 및 Carter 역(Pepperdine PDF) 'things which are slavish by nature... belongs to others' 확인. 직접 인용이 아닌 의역이며 취지 일치"},
+    {"claim": "'에픽테토스의 가르침을 담은 책' (저자 귀속 표현)", "verified": true, "how": "브리프 주의사항 준수: 아리아노스 편집이므로 '썼다'고 하지 않음. 대본 표현 적절"},
+    {"claim": "'2천 년 전' (훅·제목)", "verified": true, "how": "에픽테토스 50년대~135년경(SEP). 약 1,900년 전이므로 쇼츠 어법상 '2천 년 전' 반올림 허용"},
+    {"claim": "'통제의 이분법' 명칭 미사용", "verified": true, "how": "본문에 현대 명칭 미등장(프런트매터 concept 필드에만 메타데이터로 존재). 브리프 지침 준수. 가짜 명언('반응하느냐', '귀 둘 입 하나') 미사용 확인"}
+  ],
+  "issues": [],
+  "note": "3구간 전 문장이 1장 1~3절 안에서 해결되고 평판(δόξα)이 원전 목록에 그대로 있어 훅과 정확히 맞물립니다. 수정 없이 통과. 마무리 질문은 4구간의 '두 칸'과 연결되며 1구간 상황(남의 시선)과의 연결은 암시적이지만 충분합니다. 그대로 두십시오."
+}
