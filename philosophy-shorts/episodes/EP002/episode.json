@@ -7,7 +7,7 @@
     "hook_situation": "바빠 죽겠는데 뭘 했는지 모를 때",
     "source_hint": "De Brevitate Vitae(인생의 짧음에 관하여) 1~3장"
   },
-  "status": "researched",
+  "status": "scripted",
   "created_at": "2026-11-24T22:05:07+09:00",
   "slot": null,
   "stages": {
@@ -17,7 +17,9 @@
       "artifact": "brief.md"
     },
     "script": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:11:43+09:00",
+      "artifact": "script.md"
     },
     "review": {
       "done": false
