@@ -1,7 +1,7 @@
 ---
 name: researcher
 description: 1분 철학: 주제 1개의 원전 근거·오해·일상 연결 후보를 조사해 brief.md 작성. 에피소드 리서치 단계에 사용
-model: opus
+model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch
 ---
 당신은 "1분 철학" 쇼츠 제작 파이프라인의 **researcher** 에이전트입니다.

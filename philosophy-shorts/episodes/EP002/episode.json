@@ -7,7 +7,7 @@
     "hook_situation": "바빠 죽겠는데 뭘 했는지 모를 때",
     "source_hint": "De Brevitate Vitae(인생의 짧음에 관하여) 1~3장"
   },
-  "status": "storyboarded",
+  "status": "published",
   "created_at": "2026-11-24T22:05:07+09:00",
   "slot": null,
   "stages": {
@@ -39,16 +39,24 @@
       "artifact": "storyboard.json"
     },
     "assets": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:34:27+09:00",
+      "images": "hf7+reuse_cut02",
+      "tts": "edge-tts",
+      "note": "cut_08은 HF 할당량 소진으로 cut_02 재사용"
     },
     "render": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:35:26+09:00",
+      "artifact": "final.mp4"
     },
     "human_b": {
       "done": false
     },
     "publish": {
-      "done": false
+      "done": true,
+      "at": "2026-11-24T22:35:39+09:00",
+      "artifact": "metadata.json"
     },
     "analytics": {
       "done": false
