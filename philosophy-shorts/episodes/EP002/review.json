@@ -1,0 +1,15 @@
+{
+  "verdict": "pass",
+  "scores": {"hook": 5, "accuracy": 5, "single_idea": 5, "application": 5, "ending": 5, "total": 25},
+  "validator": {"ok": true, "chars": 316, "errors": [], "warnings": []},
+  "checked_claims": [
+    {"claim": "세네카는 로마 철학자", "verified": true, "how": "brief 작가 참고(기원후 49년경, 파울리누스에게 보낸 글) / 일반 사실"},
+    {"claim": "인생은 짧게 받은 게 아니라 우리가 짧게 만든다", "verified": true, "how": "brief 원전 근거 2 — De Brevitate Vitae 1.4 'non accipimus brevem vitam sed fecimus' (확신도 높음)"},
+    {"claim": "남의 요구에 시간을 다 내주는 사람을 '바쁜 사람(오쿠파티, occupati)'이라 불렀다", "verified": true, "how": "brief 용어 제안 — 2~3장의 occupati. 브리프 정의(남의 일·요구·미래 계획)를 '남의 요구'로 좁혀 썼으나 이번 편 각도(3.1 돈 vs 시간)와 맞물리는 충실한 단순화"},
+    {"claim": "돈은 한 푼도 안 나눠 주면서 인생은 얼마나 많은 사람에게 나눠 주느냐", "verified": true, "how": "brief 원전 근거 4 — 3.1 'nemo invenietur qui pecuniam suam dividere velit, vitam unusquisque quam multis distribuit' (확신도 높음)"},
+    {"claim": "\"쓸 줄만 안다면 인생은 깁니다.\"", "verified": true, "how": "brief 원전 근거 2 — 1.4 'vita, si scias uti, longa est'. 짜깁기 경고 준수: 1.4의 두 문장을 한 인용으로 붙이지 않고 뒷문장만 직접 인용"},
+    {"claim": "제목 후보 '2천 년 전 로마의 답'", "verified": true, "how": "저작 연대 49~50년(brief, Edwards 논문) → 약 1,980년. 허용 범위"}
+  ],
+  "issues": [],
+  "note": "브리프 밖 주장 없음. 3장 '돈 vs 시간' 대비를 사상→적용(시간 가계부)→마무리 질문까지 한 줄로 꿴 구성이 정확하고 날카로움. 오해 항목('인생은 짧다'로 읽히는 훅)도 피함. 확정 전 천병희 역본으로 1.4 문장 한 번 대조만 권장."
+}
