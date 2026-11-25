@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>퀴즈와 퍼즐 게임으로 배우는 논리학 입문</title>
+<title>퀴즈와 퍼즐 게임으로 배우는 논리학</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap">
@@ -145,14 +145,14 @@ h2{font-size:20px;margin:36px 0 14px}
   <aside class="side" id="side">
     <div class="brand" data-go="home">
       <small>LOGIC · GAME BOOK</small>
-      <b>퀴즈와 퍼즐 게임으로<br>배우는 논리학 입문</b>
+      <b>퀴즈와 퍼즐 게임으로<br>배우는 논리학</b>
     </div>
     <nav id="nav"></nav>
     <div class="side-foot">© 휴먼앤사이언스연구소 · 휴먼북스</div>
   </aside>
   <div class="scrim" id="scrim"></div>
   <main>
-    <div class="topbar"><button id="menuBtn" aria-label="메뉴 열기">☰</button><span>퀴즈와 퍼즐 게임으로 배우는 논리학 입문</span></div>
+    <div class="topbar"><button id="menuBtn" aria-label="메뉴 열기">☰</button><span>퀴즈와 퍼즐 게임으로 배우는 논리학</span></div>
     <div class="content" id="view"></div>
   </main>
 </div>
@@ -164,7 +164,7 @@ h2{font-size:20px;margin:36px 0 14px}
    - questions 가 있으면 바로 플레이 가능, 없으면 '준비 중'으로 표시됩니다.
    ========================================================= */
 const CHAPTERS = [
-  { id:"c1", no:"1장", title:"논리학이란 무엇인가", desc:"논증의 뜻과 구조, 전제와 결론을 구별해 봅니다.", icon:"①",
+  { id:"c1", part:"1부 논리적 사고", no:"1장", title:"논리학의 기본개념", desc:"논증의 뜻과 구조, 전제와 결론을 구별해 봅니다.", icon:"①",
     games:[
       { id:"c1g1", title:"논증 찾기 퀴즈", type:"퀴즈",
         questions:[
@@ -185,14 +185,16 @@ const CHAPTERS = [
         ]},
       { id:"c1g2", title:"전제·결론 분류 퍼즐", type:"퍼즐" }
     ]},
-  { id:"c2", no:"2장", title:"연역과 귀납", desc:"반드시 따라 나오는 추론과 그럴듯하게 따라 나오는 추론.", icon:"②",
-    games:[ { id:"c2g1", title:"연역일까 귀납일까?", type:"퀴즈" }, { id:"c2g2", title:"타당성 판정 게임", type:"게임" } ]},
-  { id:"c3", no:"3장", title:"명제논리", desc:"연결사와 진리표로 문장의 참·거짓을 계산합니다.", icon:"③",
-    games:[ { id:"c3g1", title:"논리 연결사 짝 맞추기", type:"게임" }, { id:"c3g2", title:"진리표 퍼즐", type:"퍼즐" } ]},
-  { id:"c4", no:"4장", title:"정언논리와 삼단논법", desc:"‘모든’, ‘어떤’으로 이루어진 추론을 벤 다이어그램으로.", icon:"④",
-    games:[ { id:"c4g1", title:"벤 다이어그램 색칠하기", type:"퍼즐" }, { id:"c4g2", title:"삼단논법 판정 퀴즈", type:"퀴즈" } ]},
-  { id:"c5", no:"5장", title:"오류", desc:"그럴듯하지만 잘못된 추론을 찾아냅니다.", icon:"⑤",
-    games:[ { id:"c5g1", title:"오류 탐정", type:"게임" }, { id:"c5g2", title:"오류 이름 맞히기", type:"퀴즈" } ]}
+  { id:"c2", part:"1부 논리적 사고", no:"2장", title:"논리, 사고, 언어", desc:"생각과 언어가 논리와 어떻게 맞물리는지 살펴봅니다.", icon:"②",
+    games:[ { id:"c2g1", title:"언어의 기능 맞히기", type:"퀴즈" }, { id:"c2g2", title:"애매어·모호어 찾기", type:"게임" } ]},
+  { id:"c3", part:"2부 논증의 종류", no:"3장", title:"연역논증", desc:"전제가 참이면 결론이 반드시 참이 되는 추론.", icon:"③",
+    games:[ { id:"c3g1", title:"타당성 판정 게임", type:"게임" }, { id:"c3g2", title:"진리표 퍼즐", type:"퍼즐" } ]},
+  { id:"c4", part:"2부 논증의 종류", no:"4장", title:"귀납논증", desc:"전제가 결론을 개연적으로 뒷받침하는 추론.", icon:"④",
+    games:[ { id:"c4g1", title:"연역일까 귀납일까?", type:"퀴즈" }, { id:"c4g2", title:"귀납 강도 순위 퍼즐", type:"퍼즐" } ]},
+  { id:"c5", part:"3부 논증의 평가", no:"5장", title:"연역적 오류", desc:"형식이 잘못되어 생기는 오류를 찾아냅니다.", icon:"⑤",
+    games:[ { id:"c5g1", title:"형식적 오류 탐정", type:"게임" }, { id:"c5g2", title:"오류 이름 맞히기", type:"퀴즈" } ]},
+  { id:"c6", part:"3부 논증의 평가", no:"6장", title:"귀납적 오류", desc:"성급한 일반화처럼 근거가 약한 추론을 가려냅니다.", icon:"⑥",
+    games:[ { id:"c6g1", title:"귀납 오류 탐정", type:"게임" }, { id:"c6g2", title:"성급한 일반화 찾기", type:"퀴즈" } ]}
 ];
 
 /* ---------- 진행 기록 (이 브라우저에만 저장) ---------- */
@@ -211,8 +213,10 @@ function renderNav(){
   const nav = document.getElementById("nav");
   let h = `<button class="nav-item" data-go="home"><span class="ico">◧</span>대시보드</button>
            <button class="nav-item" data-go="author"><span class="ico">✎</span>지은이 소개</button>
-           <div class="nav-label">CHAPTERS</div>`;
+           `;
+  let part = "";
   for(const c of CHAPTERS){
+    if(c.part !== part){ part = c.part; h += `<div class="nav-label">${part}</div>`; }
     const open = current.startsWith(c.id) ? " open" : "";
     h += `<div class="group${open}" data-group="${c.id}">
       <button class="nav-item" data-toggle="${c.id}"><span class="ico">${c.icon}</span>${c.title}<span class="caret">▶</span></button>
@@ -260,7 +264,7 @@ function viewHome(){
   return `
   <section class="hero">
     <small>정영기 지음 · 휴먼북스</small>
-    <h1>퀴즈와 퍼즐 게임으로<br>배우는 논리학 입문</h1>
+    <h1>퀴즈와 퍼즐 게임으로<br>배우는 논리학</h1>
     <p>논리학은 외우는 과목이 아니라 직접 해 보며 익히는 기술입니다. 장마다 준비된 퀴즈와 퍼즐을 풀면서 논증을 읽고, 따지고, 바로잡는 힘을 길러 보세요.</p>
     <div class="btns">
       <button class="btn" onclick="go('${first.id}')">▶ 바로 시작하기</button>
@@ -272,13 +276,13 @@ function viewHome(){
     <div class="stat"><b>${avg}점</b><span>평균 점수 (완료한 게임 기준)</span><div class="bar"><i style="width:${avg}%"></i></div></div>
     <div class="stat"><b>${ready}개</b><span>지금 플레이 가능 · 나머지는 준비 중</span><div class="bar"><i style="width:${total?ready/total*100:0}%"></i></div></div>
   </div>
-  <h2>장별 게임</h2>
-  <div class="grid">${CHAPTERS.map(c => {
+  ${[...new Set(CHAPTERS.map(c => c.part))].map(pt => `<h2>${pt}</h2>
+  <div class="grid">${CHAPTERS.filter(c => c.part === pt).map(c => {
     const d = c.games.filter(g => progress[g.id]).length;
     return `<button class="ch" onclick="go('${c.games[0].id}')">
       <div class="n">${c.no}</div><h3>${c.title}</h3><p>${c.desc}</p>
       <div class="meta">게임 ${c.games.length}개 · 완료 ${d}개</div></button>`;
-  }).join("")}</div>`;
+  }).join("")}</div>`).join("")}`;
 }
 
 /* ---------- 지은이 소개 ---------- */
@@ -287,13 +291,14 @@ function viewAuthor(){
     ["AI와 비판적 사고","커뮤니케이션북스",""],["논리적 사고와 표현","에이치북스",""],
     ["철학과 영상문화","해피&북스",""],["논리와 사고","충남대학교 출판문화원",""],
     ["귀납논리와 과학철학","철학과 현실사","공저"],["논리와 진리","철학과 현실사","공저"],
-    ["역사와 고전의 창으로 본 21세기 공공리더십","박영사","공저"]
+    ["역사와 고전의 창으로 본 21세기 공공리더십","박영사","공저"],
+    ["인문학 독서토론 20","",""]
   ];
   const trans = [
     ["현대경험주의와 분석철학","고려대학교 출판부","공역"],
     ["근대 철학사 — 데카르트에서 칸트까지","서광사","공역"],["공학철학","서광사",""]
   ];
-  const li = a => a.map(([t,p,k]) => `<li><em>『${t}』</em>${k?`<span class="kind">${k}</span>`:""}<span class="pub">${p}</span></li>`).join("");
+  const li = a => a.map(([t,p,k]) => `<li><em>『${t}』</em>${k?`<span class="kind">${k}</span>`:""}${p?`<span class="pub">${p}</span>`:""}</li>`).join("");
   return `
   <div class="crumb">대시보드 › 지은이 소개</div>
   <h1>지은이 소개</h1>
@@ -318,7 +323,7 @@ function viewAuthor(){
 /* ---------- 퀴즈 엔진 ---------- */
 function startGame(g){
   const v = document.getElementById("view");
-  const head = `<div class="crumb">${g.ch.no} ${g.ch.title} › ${g.title}</div>`;
+  const head = `<div class="crumb">${g.ch.part} › ${g.ch.no} ${g.ch.title} › ${g.title}</div>`;
   if(!g.questions){
     v.innerHTML = `${head}<h1>${g.title}</h1>
       <div class="card soon"><div class="big">🧩</div><p><b>준비 중인 ${g.type}입니다.</b><br>곧 이곳에서 플레이할 수 있어요.</p>
